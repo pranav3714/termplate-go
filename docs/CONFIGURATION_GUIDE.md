@@ -485,4 +485,4 @@ Configuration values are resolved in this order (highest to lowest priority):
 
 - See example usage in `cmd/example/greet.go`
 - Check the full config example in `configs/config.example.yaml`
-- Read about adding commands in `GETTING_STARTED.md`
+- Read about adding commands in `docs/GETTING_STARTED.md`

@@ -123,7 +123,7 @@ mkdir -p cmd/myfeature
 mkdir -p internal/service/myfeature
 
 # Create files following the example pattern
-# See GETTING_STARTED.md for detailed instructions
+# See docs/GETTING_STARTED.md for detailed instructions
 ```
 
 ### 4. Customize Configuration
@@ -316,8 +316,8 @@ internal/model/  (domain entities - no dependencies)
 
 ## Resources
 
-- **GETTING_STARTED.md** - Detailed customization guide
-- **PROJECT_SUMMARY.md** - Complete project overview
+- **docs/GETTING_STARTED.md** - Detailed customization guide
+- **docs/PROJECT_SUMMARY.md** - Complete project overview
 - **GO_CLI_COMPREHENSIVE_REFERENCE.md** - Full reference
 - **README.md** - Project documentation
 

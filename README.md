@@ -1,19 +1,23 @@
-# mycli
+# ever-so-powerful-go
 
-A production-ready Go CLI tool built with best practices and a strong foundation.
+A production-ready Go CLI tool built with best practices and a strong foundation. Designed for developers who need API interaction, file processing, database operations, and flexible output formatting.
 
 ## Features
 
-- **Cobra Framework**: Industry-standard CLI framework with nested commands, auto-help, and shell completion
-- **Viper Configuration**: Flexible configuration with support for config files, environment variables, and defaults
-- **Structured Logging**: Production-ready logging with slog (JSON in production, text in development)
-- **Type-Safe Error Handling**: Domain-specific errors with proper wrapping and unwrapping
+- **Cobra Framework**: Industry-standard CLI with nested commands, auto-help, and shell completion
+- **Viper Configuration**: Flexible configuration with config files, environment variables, and defaults
+- **Structured Logging**: Production-ready logging with slog (JSON/text output)
+- **Multiple Output Formats**: JSON, YAML, Table (ASCII/Unicode/Markdown), CSV
+- **API Client Configuration**: Keys, tokens, retries, rate limiting, custom headers
+- **File Processing**: Pattern matching, size limits, backup options, permission control
+- **Database Support**: PostgreSQL, MySQL, SQLite with connection pooling
+- **Type-Safe Error Handling**: Domain-specific errors with proper wrapping
 - **Comprehensive Testing**: Table-driven tests, mocks, and test helpers
-- **Static Analysis**: golangci-lint with extensive linter suite
+- **Static Analysis**: golangci-lint with 20+ linters
 - **CI/CD Ready**: GitHub Actions workflows for testing and releasing
 - **Cross-Platform**: Build for Linux, macOS, and Windows
 - **Docker Support**: Multi-stage Dockerfile for minimal container images
-- **Release Automation**: GoReleaser configuration for automated releases
+- **Git Hooks**: Automatic formatting and linting with lefthook
 
 ## Quick Start
 
@@ -26,8 +30,8 @@ A production-ready Go CLI tool built with best practices and a strong foundation
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourorg/mycli.git
-cd mycli
+git clone https://github.com/blacksilver/ever-so-powerful.git
+cd ever-so-powerful
 
 # Install dependencies
 go mod download
@@ -36,24 +40,66 @@ go mod download
 make build
 
 # Or build manually
-go build -o build/bin/mycli .
+go build -o build/bin/ever-so-powerful-go .
 ```
 
 ### Usage
 
 ```bash
 # Show help
-./build/bin/mycli --help
+./build/bin/ever-so-powerful-go --help
 
 # Show version
-./build/bin/mycli version
+./build/bin/ever-so-powerful-go version
 
 # Show version in JSON format
-./build/bin/mycli version --output json
+./build/bin/ever-so-powerful-go version --output json
+
+# Run example command
+./build/bin/ever-so-powerful-go example greet --name "World"
+
+# With verbose logging
+./build/bin/ever-so-powerful-go -v example greet --name "User" --uppercase
 
 # Generate shell completion
-./build/bin/mycli completion bash > /etc/bash_completion.d/mycli
+./build/bin/ever-so-powerful-go completion bash > /etc/bash_completion.d/ever-so-powerful-go
 ```
+
+## Configuration
+
+Configuration can be loaded from:
+
+1. **Command line flag**: `--config /path/to/config.yaml`
+2. **Home directory**: `~/.ever-so-powerful-go.yaml`
+3. **Current directory**: `./.ever-so-powerful-go.yaml`
+4. **Environment variables**: `EVER_SO_POWERFUL_GO_*`
+
+### Quick Setup
+
+```bash
+# Copy example configuration
+cp configs/config.example.yaml ~/.ever-so-powerful-go.yaml
+
+# Edit with your settings
+vim ~/.ever-so-powerful-go.yaml
+
+# Or use environment variables
+export EVER_SO_POWERFUL_GO_API_KEY=your-api-key
+export EVER_SO_POWERFUL_GO_OUTPUT_FORMAT=json
+export EVER_SO_POWERFUL_GO_DB_USER=dbuser
+export EVER_SO_POWERFUL_GO_DB_PASSWORD=dbpass
+```
+
+See [Configuration Guide](docs/CONFIGURATION_GUIDE.md) for detailed documentation.
+
+## Documentation
+
+- **[Next Steps](docs/NEXT_STEPS.md)** - What to do now (start here!)
+- **[Getting Started](docs/GETTING_STARTED.md)** - How to add commands and customize
+- **[Configuration Guide](docs/CONFIGURATION_GUIDE.md)** - Complete configuration reference
+- **[Customization Complete](docs/CUSTOMIZATION_COMPLETE.md)** - What was customized
+- **[Project Summary](docs/PROJECT_SUMMARY.md)** - Project overview
+- **[CLI Reference](docs/GO_CLI_COMPREHENSIVE_REFERENCE.md)** - Complete Go CLI reference
 
 ## Development
 
@@ -98,105 +144,108 @@ make audit
 make clean
 ```
 
-### Project Structure
+## Project Structure
 
 ```
-mycli/
-├── main.go                       # Entry point (minimal code)
+ever-so-powerful/
 ├── cmd/                          # CLI commands (Cobra)
-│   ├── root.go                   # Root command, global flags
+│   ├── root.go                   # Root command with global flags
 │   ├── version.go                # Version command
-│   └── completion.go             # Shell completion command
+│   ├── completion.go             # Shell completion
+│   └── example/                  # Example command group
 ├── internal/                     # Private application code
 │   ├── config/                   # Configuration (Viper)
 │   ├── logger/                   # Logging (slog)
 │   ├── model/                    # Domain models and errors
 │   ├── handler/                  # Command handlers
 │   ├── service/                  # Business logic
+│   ├── output/                   # Output formatting
 │   └── repository/               # Data access layer
 ├── pkg/                          # Public packages
 │   └── version/                  # Version information
 ├── configs/                      # Configuration templates
-│   └── config.example.yaml       # Example configuration
+├── docs/                         # Documentation
 ├── test/                         # Integration & E2E tests
-├── build/                        # Build configurations
-│   └── package/                  # Docker files
-└── scripts/                      # Development scripts
+└── build/                        # Build configurations
 ```
 
-## Configuration
+## Adding Your First Command
 
-The CLI tool supports multiple configuration sources with the following priority (highest to lowest):
+See the detailed guide in [Getting Started](docs/GETTING_STARTED.md).
 
-1. Explicit flags
-2. Environment variables (prefixed with `MYCLI_`)
-3. Configuration file (`.mycli.yaml` in home directory or current directory)
-4. Default values
-
-### Configuration File
-
-Create a configuration file at `~/.mycli.yaml` or `./.mycli.yaml`:
-
-```yaml
-verbose: false
-log_level: info
-output: text
-
-project:
-  default_template: go-api
-  output_dir: ./projects
-
-server:
-  host: localhost
-  port: 8080
-  read_timeout: 30s
-  write_timeout: 30s
-
-api:
-  base_url: https://api.example.com
-  key: ${MYCLI_API_KEY}
-  timeout: 10s
-```
-
-### Environment Variables
-
-```bash
-export MYCLI_VERBOSE=true
-export MYCLI_LOG_LEVEL=debug
-export MYCLI_API_KEY=your-api-key
-```
-
-## Adding New Commands
-
-To add a new command, follow this pattern:
-
-1. Create a new file in `cmd/` (e.g., `cmd/mycommand.go`)
-2. Define the command structure
-3. Add the command to `rootCmd` in `cmd/root.go`
-
-Example:
+Quick example:
 
 ```go
-package cmd
+// cmd/mycommand/mycommand.go
+package mycommand
 
 import (
-    "fmt"
     "github.com/spf13/cobra"
+    "github.com/blacksilver/ever-so-powerful/internal/handler"
 )
 
-var myCmd = &cobra.Command{
+var Cmd = &cobra.Command{
     Use:   "mycommand",
-    Short: "Brief description",
-    Long:  "Longer description",
-    RunE: func(cmd *cobra.Command, args []string) error {
-        fmt.Println("Hello from mycommand!")
-        return nil
+    Short: "Description of your command",
+    RunE: func(cmd *cobra.Command, _ []string) error {
+        h := handler.NewMyHandler()
+        return h.Execute(cmd.Context(), handler.MyInput{})
     },
 }
+```
+
+Register in `cmd/root.go`:
+
+```go
+import "github.com/blacksilver/ever-so-powerful/cmd/mycommand"
 
 func init() {
-    rootCmd.AddCommand(myCmd)
+    rootCmd.AddCommand(mycommand.Cmd)
 }
+```
+
+## Configuration Examples
+
+### API Client
+
+```yaml
+api:
+  base_url: https://api.github.com
+  token: ${GITHUB_TOKEN}
+  timeout: 60s
+  retry_attempts: 3
+```
+
+### File Processing
+
+```yaml
+files:
+  input_dir: ./data/input
+  output_dir: ./data/output
+  patterns: ["*.csv", "*.json"]
+  max_file_size: 52428800  # 50MB
+```
+
+### Database
+
+```yaml
+database:
+  driver: postgres
+  host: localhost
+  port: 5432
+  database: myapp
+  username: ${DB_USER}
+  password: ${DB_PASSWORD}
+```
+
+### Output Formatting
+
+```yaml
+output:
+  format: json        # text, json, yaml, table, csv
+  pretty: true
+  color: true
+  table_style: unicode  # ascii, unicode, markdown
 ```
 
 ## Testing
@@ -211,8 +260,8 @@ go test -cover ./...
 # Run tests with race detection
 go test -race ./...
 
-# Run specific test
-go test -v ./internal/config -run TestLoad
+# Generate coverage report
+make coverage
 ```
 
 ## Building
@@ -231,10 +280,10 @@ make build-all
 
 ```bash
 # Build Docker image
-docker build -f build/package/Dockerfile -t mycli:latest .
+docker build -f build/package/Dockerfile -t ever-so-powerful-go:latest .
 
 # Run Docker container
-docker run --rm mycli:latest version
+docker run --rm ever-so-powerful-go:latest version
 ```
 
 ## Releasing
@@ -257,64 +306,23 @@ Generate shell completion scripts:
 
 ```bash
 # Bash
-mycli completion bash > /etc/bash_completion.d/mycli
-source ~/.bashrc
+ever-so-powerful-go completion bash > /etc/bash_completion.d/ever-so-powerful-go
 
 # Zsh
-mycli completion zsh > "${fpath[1]}/_mycli"
-source ~/.zshrc
+ever-so-powerful-go completion zsh > "${fpath[1]}/_ever-so-powerful-go"
 
 # Fish
-mycli completion fish > ~/.config/fish/completions/mycli.fish
-source ~/.config/fish/config.fish
+ever-so-powerful-go completion fish > ~/.config/fish/completions/ever-so-powerful-go.fish
 
 # PowerShell
-mycli completion powershell | Out-String | Invoke-Expression
+ever-so-powerful-go completion powershell | Out-String | Invoke-Expression
 ```
-
-## License
-
-[Your License Here]
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-## Customization Guide
-
-To customize this template for your project:
-
-1. **Update Module Path**: Change `github.com/yourorg/mycli` to your actual module path
-   - In `go.mod`
-   - In all import statements
-   - In `Makefile`
-   - In `.goreleaser.yml`
-
-2. **Update Binary Name**: Change `mycli` to your desired binary name
-   - In `Makefile` (`BINARY_NAME`)
-   - In `README.md`
-   - In `.goreleaser.yml`
-
-3. **Update Description**: Edit the descriptions in
-   - `cmd/root.go` (`Short` and `Long` fields)
-   - `README.md`
-
-4. **Configure Your Domain**: Update the configuration structures in
-   - `internal/config/config.go`
-   - `internal/config/defaults.go`
-   - `configs/config.example.yaml`
-
-5. **Add Your Commands**: Create new command files in `cmd/` directory
-
-6. **Implement Business Logic**: Add your services in `internal/service/`
-
-7. **Add Tests**: Write tests for all your code
 
 ## Architecture
 
-This CLI tool follows clean architecture principles:
+This CLI follows clean architecture principles:
 
-- **cmd/**: Thin CLI layer, only wiring
+- **cmd/**: Thin CLI layer - only wiring, no business logic
 - **internal/handler/**: Input validation and command handling
 - **internal/service/**: Business logic (testable, framework-independent)
 - **internal/repository/**: Data access abstraction
@@ -344,10 +352,22 @@ This template follows Go best practices:
 - ✅ Docker support
 - ✅ Shell completion
 
-## References
+## License
+
+[MIT License](LICENSE)
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## Resources
 
 - [Cobra Documentation](https://cobra.dev/)
 - [Viper Documentation](https://github.com/spf13/viper)
 - [Standard Go Project Layout](https://github.com/golang-standards/project-layout)
 - [Effective Go](https://go.dev/doc/effective_go)
 - [Uber Go Style Guide](https://github.com/uber-go/guide/blob/master/style.md)
+
+## Support
+
+For detailed guides and examples, check the [documentation](docs/).

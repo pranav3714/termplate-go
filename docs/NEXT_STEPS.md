@@ -95,7 +95,7 @@ mkdir -p internal/service/mycommand
 # 4. Wire it up in cmd/root.go
 ```
 
-See `GETTING_STARTED.md` for detailed instructions.
+See `docs/GETTING_STARTED.md` for detailed instructions.
 
 ### Option 2: Customize Configuration
 
@@ -143,7 +143,7 @@ Create your first test file:
 # internal/service/example/service_test.go
 
 # Follow table-driven test pattern
-# See GETTING_STARTED.md for examples
+# See docs/GETTING_STARTED.md for examples
 
 # Run tests
 go test ./...
@@ -476,9 +476,9 @@ docker run --rm ever-so-powerful-go:latest process --file test.txt
 
 ## Documentation
 
-- **GETTING_STARTED.md** - Detailed guide for adding features
-- **CUSTOMIZATION_COMPLETE.md** - What was customized
-- **PROJECT_SUMMARY.md** - Complete project overview
+- **docs/GETTING_STARTED.md** - Detailed guide for adding features
+- **docs/CUSTOMIZATION_COMPLETE.md** - What was customized
+- **docs/PROJECT_SUMMARY.md** - Complete project overview
 - **README.md** - General documentation
 - **GO_CLI_COMPREHENSIVE_REFERENCE.md** - Full reference guide
 

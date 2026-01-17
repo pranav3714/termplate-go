@@ -34,7 +34,7 @@ mycli/
 ├── lefthook.yml                  ✓ Git hooks configuration
 ├── .goreleaser.yml               ✓ Release automation
 ├── README.md                     ✓ Comprehensive documentation
-├── GETTING_STARTED.md            ✓ Quick start guide
+├── docs/GETTING_STARTED.md            ✓ Quick start guide
 ├── LICENSE                       ✓ MIT License
 │
 ├── cmd/                          ✓ CLI commands
@@ -199,9 +199,9 @@ internal/model/*.go (domain entities)
 ## Documentation
 
 - **README.md** - Project overview and features
-- **GETTING_STARTED.md** - Detailed guide for customization
+- **docs/GETTING_STARTED.md** - Detailed guide for customization
 - **GO_CLI_COMPREHENSIVE_REFERENCE.md** - Complete reference (your source)
-- **PROJECT_SUMMARY.md** - This file
+- **docs/PROJECT_SUMMARY.md** - This file
 
 ## Development Tools Configured
 
@@ -276,4 +276,4 @@ $ mycli completion bash > /etc/bash_completion.d/mycli
 
 The template is fully functional and ready to build upon. All dependencies are installed, the code compiles, and the example command demonstrates the complete architecture from CLI layer through to business logic.
 
-Start customizing by following the **GETTING_STARTED.md** guide!
+Start customizing by following the **docs/GETTING_STARTED.md** guide!
