@@ -1,0 +1,20 @@
+# ever-so-powerful-go configuration
+
+verbose: false
+log_level: info  # debug, info, warn, error
+output: text     # text, json, yaml
+
+project:
+  default_template: go-api
+  output_dir: ./projects
+
+server:
+  host: localhost
+  port: 8080
+  read_timeout: 30s
+  write_timeout: 30s
+
+api:
+  base_url: https://api.example.com
+  key: ${MYCLI_API_KEY}
+  timeout: 10s

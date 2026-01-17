@@ -1,0 +1,38 @@
+version: 2
+project_name: ever-so-powerful-go
+
+builds:
+  - id: ever-so-powerful-go
+    main: .
+    binary: ever-so-powerful-go
+    env: [CGO_ENABLED=0]
+    goos: [linux, darwin, windows]
+    goarch: [amd64, arm64]
+    ldflags:
+      - -s -w
+      - -X github.com/blacksilver/ever-so-powerful/pkg/version.Version={{.Version}}
+      - -X github.com/blacksilver/ever-so-powerful/pkg/version.Commit={{.Commit}}
+      - -X github.com/blacksilver/ever-so-powerful/pkg/version.Date={{.Date}}
+
+archives:
+  - formats: [tar.gz]
+    format_overrides:
+      - goos: windows
+        format: zip
+    files:
+      - LICENSE
+      - README.md
+      - configs/config.example.yaml
+
+checksum:
+  name_template: 'checksums.txt'
+
+changelog:
+  sort: asc
+  filters:
+    exclude: ['^docs:', '^test:', '^chore:']
+
+release:
+  github:
+    owner: blacksilver
+    name: ever-so-powerful

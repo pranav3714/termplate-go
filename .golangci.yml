@@ -1,0 +1,51 @@
+run:
+  timeout: 5m
+  modules-download-mode: readonly
+
+linters:
+  enable:
+    - errcheck
+    - govet
+    - staticcheck
+    - gosimple
+    - unused
+    - ineffassign
+    - gofmt
+    - goimports
+    - misspell
+    - cyclop
+    - gocognit
+    - nestif
+    - goconst
+    - gocritic
+    - revive
+    - unconvert
+    - unparam
+    - errorlint
+    - wrapcheck
+    - nilerr
+    - gosec
+    - bodyclose
+    - sqlclosecheck
+    - tparallel
+    - prealloc
+
+  settings:
+    cyclop:
+      max-complexity: 15
+    gocognit:
+      min-complexity: 20
+    nestif:
+      min-complexity: 5
+
+issues:
+  exclude-rules:
+    - path: _test\.go
+      linters:
+        - dupl
+        - funlen
+        - gocognit
+        - gosec
+        - wrapcheck
+  max-issues-per-linter: 50
+  max-same-issues: 10

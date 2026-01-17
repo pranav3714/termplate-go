@@ -1,0 +1,22 @@
+# Build artifacts
+/build/bin/
+*.exe
+*.test
+dist/
+
+# Coverage
+coverage/
+coverage.out
+*.prof
+
+# IDEs
+.idea/
+.vscode/
+*.swp
+
+# OS files
+.DS_Store
+
+# Config
+.env
+.ever-so-powerful-go.yaml
