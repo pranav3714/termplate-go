@@ -1,4 +1,9 @@
-# Next Steps Guide 🚀
+# Next Steps Guide
+
+> **Document Type**: Getting Started Guide
+> **Purpose**: Guide users on what to do after initial setup
+> **Keywords**: next steps, getting started, what to do now, first steps, post-setup
+> **Related**: GETTING_STARTED.md, CONFIGURATION_GUIDE.md, PROJECT_CONTEXT.md
 
 Your `ever-so-powerful-go` CLI is fully set up, customized, and ready for development!
 

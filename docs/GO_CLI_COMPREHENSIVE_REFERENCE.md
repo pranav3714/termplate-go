@@ -1,6 +1,13 @@
 # Go CLI Tool - Comprehensive Reference
 
+> **Document Type**: Complete Reference
+> **Purpose**: Authoritative source for all Go CLI patterns and best practices
+> **Keywords**: go cli, cobra, viper, patterns, reference, best practices, project structure, testing, ci/cd
+> **Related**: CONVENTIONS.md, GETTING_STARTED.md
+
 A complete reference for building production-quality Go CLI tools. Covers everything from project structure to CI/CD, profiling, and release automation.
+
+**This document is the source of truth for all Go patterns used in this project.**
 
 ---
 

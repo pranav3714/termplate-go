@@ -1,5 +1,8 @@
 # ever-so-powerful-go
 
+> **For AI Models**: Start with [PROJECT_CONTEXT.md](PROJECT_CONTEXT.md) for complete project context, then [AI_GUIDE.md](AI_GUIDE.md) for analysis workflows. See [DOCUMENTATION_INDEX.md](DOCUMENTATION_INDEX.md) for complete documentation map.
+> **For Developers**: See [Documentation](#documentation) section below for guides.
+
 A production-ready Go CLI tool built with best practices and a strong foundation. Designed for developers who need API interaction, file processing, database operations, and flexible output formatting.
 
 ## Features
@@ -94,12 +97,29 @@ See [Configuration Guide](docs/CONFIGURATION_GUIDE.md) for detailed documentatio
 
 ## Documentation
 
+### 🤖 For AI Models (Start Here)
+
+- **[AI Guide](AI_GUIDE.md)** - Complete AI workflow guide for this codebase
+- **[Project Context](PROJECT_CONTEXT.md)** - Architecture, structure, current state
+- **[Conventions](CONVENTIONS.md)** - Coding standards, patterns, rules
+- **[Quick Reference](QUICK_REFERENCE.md)** - Fast lookups, snippets, file locations
+
+### 👨‍💻 For Developers
+
+**Getting Started**:
 - **[Next Steps](docs/NEXT_STEPS.md)** - What to do now (start here!)
 - **[Getting Started](docs/GETTING_STARTED.md)** - How to add commands and customize
-- **[Configuration Guide](docs/CONFIGURATION_GUIDE.md)** - Complete configuration reference
 - **[Customization Complete](docs/CUSTOMIZATION_COMPLETE.md)** - What was customized
+
+**Configuration**:
+- **[Configuration Guide](docs/CONFIGURATION_GUIDE.md)** - Complete configuration reference
+- **[Config Example](configs/config.example.yaml)** - All available settings
+
+**Reference**:
+- **[CLI Comprehensive Reference](docs/GO_CLI_COMPREHENSIVE_REFERENCE.md)** - Authoritative Go CLI patterns
 - **[Project Summary](docs/PROJECT_SUMMARY.md)** - Project overview
-- **[CLI Reference](docs/GO_CLI_COMPREHENSIVE_REFERENCE.md)** - Complete Go CLI reference
+
+**All Documentation**: See [docs/README.md](docs/README.md) for complete index
 
 ## Development
 

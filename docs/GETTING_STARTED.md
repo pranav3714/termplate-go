@@ -1,6 +1,11 @@
-# Getting Started with mycli
+# Getting Started Guide
 
-This guide will help you get started with the mycli template and customize it for your needs.
+> **Document Type**: Development Guide
+> **Purpose**: Comprehensive guide for adding features and customizing the CLI
+> **Keywords**: add command, create feature, customize, extend, development, how to add
+> **Related**: NEXT_STEPS.md, CONFIGURATION_GUIDE.md, CONVENTIONS.md, PROJECT_CONTEXT.md
+
+This guide will help you add features and customize the CLI for your needs.
 
 ## Quick Start
 

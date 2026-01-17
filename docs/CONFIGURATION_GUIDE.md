@@ -1,5 +1,10 @@
 # Configuration Guide
 
+> **Document Type**: Reference Guide
+> **Purpose**: Complete reference for all configuration options
+> **Keywords**: configuration, config, settings, api config, database config, file config, output formats, viper, environment variables
+> **Related**: config/config.go, config/defaults.go, configs/config.example.yaml
+
 Your CLI now has comprehensive configuration support for API clients, file processing, database connections, and multiple output formats.
 
 ## Table of Contents
