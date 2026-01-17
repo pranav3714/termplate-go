@@ -1,20 +1,215 @@
 # ever-so-powerful-go configuration
+# Copy this file to ~/.ever-so-powerful-go.yaml or ./.ever-so-powerful-go.yaml
+# All settings can be overridden with environment variables using EVER_SO_POWERFUL_GO_ prefix
+# Example: EVER_SO_POWERFUL_GO_VERBOSE=true
 
+# ============================================================================
+# General Settings
+# ============================================================================
+
+# Enable verbose/debug output
 verbose: false
-log_level: info  # debug, info, warn, error
-output: text     # text, json, yaml
 
-project:
-  default_template: go-api
-  output_dir: ./projects
+# Log level: debug, info, warn, error
+log_level: info
 
-server:
-  host: localhost
-  port: 8080
-  read_timeout: 30s
-  write_timeout: 30s
+# ============================================================================
+# Output Configuration
+# ============================================================================
+
+output:
+  # Output format: text, json, yaml, table, csv
+  format: text
+
+  # Enable colored output (terminal colors)
+  color: true
+
+  # Pretty print JSON/YAML output (with indentation)
+  pretty: true
+
+  # Minimal output mode (suppress non-essential messages)
+  quiet: false
+
+  # Include timestamps in output
+  timestamp: false
+
+  # Table style: ascii, unicode, markdown
+  table_style: ascii
+
+# ============================================================================
+# API Client Configuration
+# ============================================================================
 
 api:
+  # Base URL for API requests
   base_url: https://api.example.com
-  key: ${MYCLI_API_KEY}
+
+  # API authentication (set one of these)
+  key: ${EVER_SO_POWERFUL_GO_API_KEY}      # API key
+  secret: ${EVER_SO_POWERFUL_GO_API_SECRET} # API secret
+  token: ${EVER_SO_POWERFUL_GO_API_TOKEN}  # Bearer token
+
+  # Request timeout
+  timeout: 30s
+
+  # Number of retry attempts for failed requests
+  retry_attempts: 3
+
+  # Delay between retries
+  retry_delay: 1s
+
+  # Follow HTTP redirects
+  follow_redirects: true
+
+  # Verify SSL certificates (set to false for self-signed certs)
+  verify_ssl: true
+
+  # User agent string
+  user_agent: "ever-so-powerful-go/1.0"
+
+  # Custom headers to include in all requests
+  headers:
+    X-Custom-Header: "value"
+    # Add more headers as needed
+
+  # Rate limiting (requests per second, 0 = unlimited)
+  rate_limit_per_sec: 10
+
+# ============================================================================
+# Server Configuration (if running in server mode)
+# ============================================================================
+
+server:
+  # Server host/address to bind to
+  host: localhost
+
+  # Server port
+  port: 8080
+
+  # Request read timeout
+  read_timeout: 30s
+
+  # Response write timeout
+  write_timeout: 30s
+
+  # Connection idle timeout
+  idle_timeout: 60s
+
+  # Graceful shutdown timeout
+  shutdown_timeout: 10s
+
+  # Enable TLS/HTTPS
+  tls_enabled: false
+
+  # TLS certificate file (if tls_enabled)
+  tls_cert_file: /path/to/cert.pem
+
+  # TLS private key file (if tls_enabled)
+  tls_key_file: /path/to/key.pem
+
+# ============================================================================
+# File Processing Configuration
+# ============================================================================
+
+files:
+  # Input directory for file processing
+  input_dir: ./input
+
+  # Output directory for processed files
+  output_dir: ./output
+
+  # Temporary directory for intermediate files
+  temp_dir: /tmp
+
+  # File patterns to match (glob patterns)
+  patterns:
+    - "*.txt"
+    - "*.json"
+    - "*.csv"
+
+  # Patterns to exclude
+  exclude_patterns:
+    - "*.tmp"
+    - ".*"  # Hidden files
+
+  # Maximum file size to process (in bytes, 0 = unlimited)
+  # 100MB = 104857600
+  max_file_size: 104857600
+
+  # Buffer size for file reading (in bytes)
+  buffer_size: 4096
+
+  # Automatically create directories if they don't exist
+  create_dirs: true
+
+  # Overwrite existing files in output directory
+  overwrite_existing: false
+
+  # Preserve file permissions when copying/moving
+  preserve_perms: true
+
+  # Create backup of original files before processing
+  backup_original: false
+
+# ============================================================================
+# Database Configuration
+# ============================================================================
+
+database:
+  # Database driver: postgres, mysql, sqlite
+  driver: postgres
+
+  # Database host (not used for sqlite)
+  host: localhost
+
+  # Database port
+  # PostgreSQL: 5432, MySQL: 3306
+  port: 5432
+
+  # Database name (or file path for sqlite)
+  database: mydb
+
+  # Database username
+  username: ${EVER_SO_POWERFUL_GO_DB_USER}
+
+  # Database password (use environment variable for security)
+  password: ${EVER_SO_POWERFUL_GO_DB_PASSWORD}
+
+  # SSL mode: disable, require, verify-ca, verify-full (postgres)
+  ssl_mode: disable
+
+  # Maximum number of open connections
+  max_open_conns: 25
+
+  # Maximum number of idle connections
+  max_idle_conns: 5
+
+  # Maximum connection lifetime
+  conn_max_lifetime: 5m
+
+  # Maximum connection idle time
+  conn_max_idle_time: 10m
+
+  # Connection timeout
   timeout: 10s
+
+  # Path to database migration files
+  migrations_path: ./migrations
+
+# ============================================================================
+# Example Environment Variables
+# ============================================================================
+#
+# You can override any setting with environment variables:
+#
+# export EVER_SO_POWERFUL_GO_VERBOSE=true
+# export EVER_SO_POWERFUL_GO_LOG_LEVEL=debug
+# export EVER_SO_POWERFUL_GO_OUTPUT_FORMAT=json
+# export EVER_SO_POWERFUL_GO_API_KEY=your-api-key
+# export EVER_SO_POWERFUL_GO_API_BASE_URL=https://your-api.com
+# export EVER_SO_POWERFUL_GO_DB_USER=dbuser
+# export EVER_SO_POWERFUL_GO_DB_PASSWORD=dbpass
+# export EVER_SO_POWERFUL_GO_FILES_INPUT_DIR=/path/to/input
+# export EVER_SO_POWERFUL_GO_FILES_OUTPUT_DIR=/path/to/output
+#
+# ============================================================================
