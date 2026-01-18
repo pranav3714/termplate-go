@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- **Release Automation System**: Complete automation for creating releases
+  - `scripts/release.sh`: 700+ line bash script for automated releases
+  - `RELEASE_RULEBOOK.md`: 600+ line comprehensive release guide
+  - Makefile targets: `release-prepare`, `release-dry-run`, `release-patch`
+  - Automated CHANGELOG updates and version link management
+  - Git tag creation with release notes
+  - Dry-run mode for safe testing
+  - Interactive and automated modes
+  - AI-discoverable documentation with example prompts
+- Enhanced README with modern styling and release section
+- Integrated release documentation across all docs (AI_GUIDE, DOCUMENTATION_INDEX)
+
 ### Changed
 - Updated all dependencies to latest versions:
   - github.com/google/go-cmp: v0.6.0 → v0.7.0
@@ -15,6 +28,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - golang.org/x/mod: v0.31.0 → v0.32.0
   - golang.org/x/tools: v0.40.0 → v0.41.0
   - github.com/cpuguy83/go-md2man/v2: v2.0.6 → v2.0.7
+
+### Fixed
+- Release script version link bug (was comparing v0.1.1→v0.1.1, now correctly v0.1.0→v0.1.1)
+- Improved error messages with actionable guidance
 
 ## [0.1.1] - 2026-01-18
 
