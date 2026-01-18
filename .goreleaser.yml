@@ -1,13 +1,19 @@
-version: 2
+# GoReleaser v1 configuration
 project_name: termplate
 
 builds:
   - id: termplate
     main: .
     binary: termplate
-    env: [CGO_ENABLED=0]
-    goos: [linux, darwin, windows]
-    goarch: [amd64, arm64]
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+      - darwin
+      - windows
+    goarch:
+      - amd64
+      - arm64
     ldflags:
       - -s -w
       - -X github.com/pranav3714/termplate-go/pkg/version.Version={{.Version}}
@@ -15,7 +21,7 @@ builds:
       - -X github.com/pranav3714/termplate-go/pkg/version.Date={{.Date}}
 
 archives:
-  - formats: [tar.gz]
+  - format: tar.gz
     format_overrides:
       - goos: windows
         format: zip
@@ -30,7 +36,10 @@ checksum:
 changelog:
   sort: asc
   filters:
-    exclude: ['^docs:', '^test:', '^chore:']
+    exclude:
+      - '^docs:'
+      - '^test:'
+      - '^chore:'
 
 release:
   github:
