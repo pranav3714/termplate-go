@@ -10,7 +10,7 @@ Your `termplate` CLI is fully set up, customized, and ready for development!
 ## What's Been Done ✅
 
 ### 1. Project Customization
-- ✅ Module path: `github.com/blacksilver/termplate`
+- ✅ Module path: `github.com/pranav3714/termplate`
 - ✅ Binary name: `termplate`
 - ✅ CLI descriptions updated
 - ✅ Config paths updated
@@ -120,7 +120,7 @@ rm internal/handler/greet.go
 rm -rf internal/service/example
 
 # Edit cmd/root.go to remove:
-# - import "github.com/blacksilver/termplate/cmd/example"
+# - import "github.com/pranav3714/termplate/cmd/example"
 # - rootCmd.AddCommand(example.Cmd)
 
 # Rebuild
@@ -131,7 +131,7 @@ make build
 
 ```bash
 # Create repository on GitHub first, then:
-git remote add origin https://github.com/blacksilver/termplate.git
+git remote add origin https://github.com/pranav3714/termplate.git
 git push -u origin main
 
 # GitHub Actions workflows are already configured!
@@ -258,7 +258,7 @@ import (
     "context"
     "fmt"
     "github.com/spf13/cobra"
-    "github.com/blacksilver/termplate/internal/handler"
+    "github.com/pranav3714/termplate/internal/handler"
 )
 
 var fileName string
@@ -294,8 +294,8 @@ package handler
 import (
     "context"
     "fmt"
-    "github.com/blacksilver/termplate/internal/model"
-    "github.com/blacksilver/termplate/internal/service/process"
+    "github.com/pranav3714/termplate/internal/model"
+    "github.com/pranav3714/termplate/internal/service/process"
 )
 
 type ProcessInput struct {
@@ -370,7 +370,7 @@ In `cmd/root.go`:
 ```go
 import (
     // ... existing imports ...
-    "github.com/blacksilver/termplate/cmd/process"
+    "github.com/pranav3714/termplate/cmd/process"
 )
 
 func init() {

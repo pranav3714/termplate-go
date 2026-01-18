@@ -147,7 +147,7 @@ package mycommand
 import (
     "context"
     "github.com/spf13/cobra"
-    "github.com/blacksilver/termplate/internal/handler"
+    "github.com/pranav3714/termplate/internal/handler"
 )
 
 // Flag variables

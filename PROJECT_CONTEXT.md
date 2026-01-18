@@ -6,7 +6,7 @@
 
 - **Project Name**: Termplate Go
 - **Type**: Production-ready Go CLI tool template
-- **Module**: `github.com/blacksilver/termplate-go`
+- **Module**: `github.com/pranav3714/termplate-go`
 - **Binary**: `termplate`
 - **Purpose**: Multi-purpose development CLI with API client, file processing, and database capabilities
 
@@ -204,7 +204,7 @@ package mycommand
 
 import (
     "github.com/spf13/cobra"
-    "github.com/blacksilver/termplate/internal/handler"
+    "github.com/pranav3714/termplate/internal/handler"
 )
 
 var Cmd = &cobra.Command{
@@ -422,7 +422,7 @@ When analyzing this project:
 ## Build Information
 
 - **Go Version**: 1.22+
-- **Module**: `github.com/blacksilver/termplate`
+- **Module**: `github.com/pranav3714/termplate`
 - **Binary**: `termplate`
 - **Build Command**: `make build`
 - **Output**: `./build/bin/termplate`

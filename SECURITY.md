@@ -4,7 +4,7 @@
 
 If you discover a security vulnerability in Termplate Go, please report it by:
 
-1. **Opening a GitHub Security Advisory**: [Create Security Advisory](https://github.com/blacksilver/termplate-go/security/advisories/new)
+1. **Opening a GitHub Security Advisory**: [Create Security Advisory](https://github.com/pranav3714/termplate-go/security/advisories/new)
 2. **OR emailing** the maintainers (if you prefer private disclosure)
 
 **Please do NOT** open a public issue for security vulnerabilities.

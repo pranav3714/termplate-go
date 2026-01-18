@@ -61,7 +61,7 @@ Enhancement suggestions are tracked as GitHub issues. When creating an enhanceme
 
 ```bash
 # Clone the repository
-git clone https://github.com/blacksilver/termplate-go.git
+git clone https://github.com/pranav3714/termplate-go.git
 cd termplate-go
 
 # Install development tools

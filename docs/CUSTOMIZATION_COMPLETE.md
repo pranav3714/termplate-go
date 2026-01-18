@@ -6,7 +6,7 @@ Your Go CLI tool has been fully customized and is ready to use.
 
 ### ✅ Module Path
 - **Old**: `github.com/yourorg/mycli`
-- **New**: `github.com/blacksilver/termplate`
+- **New**: `github.com/pranav3714/termplate`
 - Updated in: `go.mod`, all `.go` files, `.goreleaser.yml`, `Dockerfile`
 
 ### ✅ Binary Name
@@ -106,7 +106,7 @@ rm internal/handler/greet.go
 rm -rf internal/service/example
 
 # Edit cmd/root.go - remove these lines:
-# - import "github.com/blacksilver/termplate/cmd/example"
+# - import "github.com/pranav3714/termplate/cmd/example"
 # - rootCmd.AddCommand(example.Cmd)
 
 # Rebuild
@@ -140,7 +140,7 @@ If using GitHub:
 
 ```bash
 # Push to GitHub
-git remote add origin https://github.com/blacksilver/termplate.git
+git remote add origin https://github.com/pranav3714/termplate.git
 git push -u origin main
 
 # GitHub Actions workflows are already configured:

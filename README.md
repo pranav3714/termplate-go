@@ -43,7 +43,7 @@ A production-ready Go CLI tool template built with best practices and a strong f
 
 ```bash
 # Clone the repository
-git clone https://github.com/blacksilver/termplate.git
+git clone https://github.com/pranav3714/termplate.git
 cd termplate
 
 # Install dependencies
@@ -211,7 +211,7 @@ package mycommand
 
 import (
     "github.com/spf13/cobra"
-    "github.com/blacksilver/termplate/internal/handler"
+    "github.com/pranav3714/termplate/internal/handler"
 )
 
 var Cmd = &cobra.Command{
@@ -227,7 +227,7 @@ var Cmd = &cobra.Command{
 Register in `cmd/root.go`:
 
 ```go
-import "github.com/blacksilver/termplate/cmd/mycommand"
+import "github.com/pranav3714/termplate/cmd/mycommand"
 
 func init() {
     rootCmd.AddCommand(mycommand.Cmd)

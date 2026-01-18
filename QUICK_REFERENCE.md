@@ -29,7 +29,7 @@ import (
     "context"
     "fmt"
     "github.com/spf13/cobra"
-    "github.com/blacksilver/termplate/internal/handler"
+    "github.com/pranav3714/termplate/internal/handler"
 )
 
 var myFlag string
@@ -52,7 +52,7 @@ func init() {
 
 ```go
 // cmd/root.go
-import "github.com/blacksilver/termplate/cmd/mycommand"
+import "github.com/pranav3714/termplate/cmd/mycommand"
 
 func init() {
     // ... existing code ...
@@ -69,8 +69,8 @@ package handler
 import (
     "context"
     "fmt"
-    "github.com/blacksilver/termplate/internal/model"
-    "github.com/blacksilver/termplate/internal/service/myservice"
+    "github.com/pranav3714/termplate/internal/model"
+    "github.com/pranav3714/termplate/internal/service/myservice"
 )
 
 type MyInput struct {
@@ -174,8 +174,8 @@ value := viper.GetString("myfeature.setting1")
 
 ```go
 import (
-    "github.com/blacksilver/termplate/internal/config"
-    "github.com/blacksilver/termplate/internal/output"
+    "github.com/pranav3714/termplate/internal/config"
+    "github.com/pranav3714/termplate/internal/output"
 )
 
 cfg, _ := config.Load()

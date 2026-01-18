@@ -103,19 +103,19 @@ model/            → Domain entities (no dependencies)
 ```go
 // ✅ GOOD: Handler imports service
 package handler
-import "github.com/blacksilver/termplate/internal/service/myservice"
+import "github.com/pranav3714/termplate/internal/service/myservice"
 
 // ✅ GOOD: Service imports repository
 package service
-import "github.com/blacksilver/termplate/internal/repository"
+import "github.com/pranav3714/termplate/internal/repository"
 
 // ❌ BAD: Service imports handler (upward dependency)
 package service
-import "github.com/blacksilver/termplate/internal/handler"
+import "github.com/pranav3714/termplate/internal/handler"
 
 // ❌ BAD: Model imports service (upward dependency)
 package model
-import "github.com/blacksilver/termplate/internal/service"
+import "github.com/pranav3714/termplate/internal/service"
 ```
 
 ---

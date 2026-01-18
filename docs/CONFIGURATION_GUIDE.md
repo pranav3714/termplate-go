@@ -166,7 +166,7 @@ package mycommand
 
 import (
     "github.com/spf13/viper"
-    "github.com/blacksilver/termplate/internal/config"
+    "github.com/pranav3714/termplate/internal/config"
 )
 
 func runCommand() error {
@@ -231,8 +231,8 @@ package handler
 
 import (
     "github.com/spf13/viper"
-    "github.com/blacksilver/termplate/internal/config"
-    "github.com/blacksilver/termplate/internal/output"
+    "github.com/pranav3714/termplate/internal/config"
+    "github.com/pranav3714/termplate/internal/output"
 )
 
 func Execute(ctx context.Context, in Input) error {
