@@ -5,6 +5,16 @@
 
 A production-ready Go CLI tool template built with best practices and a strong foundation. Designed for developers who need API interaction, file processing, database operations, and flexible output formatting.
 
+## ⚠️ Disclaimer (The Honest Truth)
+
+**Fair warning**: I'm not a Go expert, and this was my weekend project. You know how it is - you spend two days building something cool, and it feels like a crime to just delete it, so here we are!
+
+**"But there's so much stuff I'll never use!"** - I hear you. This template is packed with features (API clients, database configs, multiple output formats, etc.). Think of it as a buffet - take what you need, leave what you don't. And honestly, with modern AI models like Claude, you're literally a few prompts away from removing anything you don't want. Just ask: *"Remove the database configuration"* and boom, done.
+
+**Compatibility note**: This has been tested and works beautifully with Claude models (Sonnet/Opus/Haiku). Will it work with other AI models? Probably! I mean, it's just documentation and code structure, not rocket science. But I haven't personally tested it with GPT or others, so your mileage may vary. If you do try it with other AI models, let me know how it goes!
+
+**TL;DR**: It works, it's documented, and it's probably overkill for your needs. But hey, better to have it and not need it than need it and have to write it on a Sunday afternoon, right? 😄
+
 ## Features
 
 - **Cobra Framework**: Industry-standard CLI with nested commands, auto-help, and shell completion
