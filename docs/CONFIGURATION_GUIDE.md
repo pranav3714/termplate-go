@@ -21,46 +21,46 @@ Your CLI now has comprehensive configuration support for API clients, file proce
 Configuration can be loaded from:
 
 1. **Command line flag**: `--config /path/to/config.yaml`
-2. **Home directory**: `~/.ever-so-powerful-go.yaml`
-3. **Current directory**: `./.ever-so-powerful-go.yaml`
+2. **Home directory**: `~/.termplate.yaml`
+3. **Current directory**: `./.termplate.yaml`
 
 ### Create Your Config File
 
 ```bash
 # Copy the example configuration
-cp configs/config.example.yaml ~/.ever-so-powerful-go.yaml
+cp configs/config.example.yaml ~/.termplate.yaml
 
 # Edit with your settings
-vim ~/.ever-so-powerful-go.yaml
+vim ~/.termplate.yaml
 ```
 
 ## Environment Variables
 
-All configuration can be overridden with environment variables using the prefix `EVER_SO_POWERFUL_GO_`:
+All configuration can be overridden with environment variables using the prefix `TERMPLATE_`:
 
 ```bash
 # General settings
-export EVER_SO_POWERFUL_GO_VERBOSE=true
-export EVER_SO_POWERFUL_GO_LOG_LEVEL=debug
+export TERMPLATE_VERBOSE=true
+export TERMPLATE_LOG_LEVEL=debug
 
 # Output settings
-export EVER_SO_POWERFUL_GO_OUTPUT_FORMAT=json
-export EVER_SO_POWERFUL_GO_OUTPUT_COLOR=false
+export TERMPLATE_OUTPUT_FORMAT=json
+export TERMPLATE_OUTPUT_COLOR=false
 
 # API settings
-export EVER_SO_POWERFUL_GO_API_KEY=your-api-key
-export EVER_SO_POWERFUL_GO_API_BASE_URL=https://api.example.com
-export EVER_SO_POWERFUL_GO_API_TIMEOUT=60s
+export TERMPLATE_API_KEY=your-api-key
+export TERMPLATE_API_BASE_URL=https://api.example.com
+export TERMPLATE_API_TIMEOUT=60s
 
 # Database settings
-export EVER_SO_POWERFUL_GO_DB_USER=dbuser
-export EVER_SO_POWERFUL_GO_DB_PASSWORD=dbpass
-export EVER_SO_POWERFUL_GO_DB_HOST=localhost
-export EVER_SO_POWERFUL_GO_DB_PORT=5432
+export TERMPLATE_DB_USER=dbuser
+export TERMPLATE_DB_PASSWORD=dbpass
+export TERMPLATE_DB_HOST=localhost
+export TERMPLATE_DB_PORT=5432
 
 # File processing
-export EVER_SO_POWERFUL_GO_FILES_INPUT_DIR=/path/to/input
-export EVER_SO_POWERFUL_GO_FILES_OUTPUT_DIR=/path/to/output
+export TERMPLATE_FILES_INPUT_DIR=/path/to/input
+export TERMPLATE_FILES_OUTPUT_DIR=/path/to/output
 ```
 
 ## Configuration Structure
@@ -89,14 +89,14 @@ output:
 ```yaml
 api:
   base_url: https://api.example.com
-  key: ${EVER_SO_POWERFUL_GO_API_KEY}
-  token: ${EVER_SO_POWERFUL_GO_API_TOKEN}
+  key: ${TERMPLATE_API_KEY}
+  token: ${TERMPLATE_API_TOKEN}
   timeout: 30s
   retry_attempts: 3
   retry_delay: 1s
   follow_redirects: true
   verify_ssl: true
-  user_agent: "ever-so-powerful-go/1.0"
+  user_agent: "termplate/1.0"
   headers:
     X-Custom-Header: "value"
   rate_limit_per_sec: 10
@@ -146,8 +146,8 @@ database:
   host: localhost
   port: 5432
   database: mydb
-  username: ${EVER_SO_POWERFUL_GO_DB_USER}
-  password: ${EVER_SO_POWERFUL_GO_DB_PASSWORD}
+  username: ${TERMPLATE_DB_USER}
+  password: ${TERMPLATE_DB_PASSWORD}
   ssl_mode: disable
   max_open_conns: 25
   max_idle_conns: 5
@@ -166,7 +166,7 @@ package mycommand
 
 import (
     "github.com/spf13/viper"
-    "github.com/blacksilver/ever-so-powerful/internal/config"
+    "github.com/blacksilver/termplate/internal/config"
 )
 
 func runCommand() error {
@@ -231,8 +231,8 @@ package handler
 
 import (
     "github.com/spf13/viper"
-    "github.com/blacksilver/ever-so-powerful/internal/config"
-    "github.com/blacksilver/ever-so-powerful/internal/output"
+    "github.com/blacksilver/termplate/internal/config"
+    "github.com/blacksilver/termplate/internal/output"
 )
 
 func Execute(ctx context.Context, in Input) error {
@@ -303,13 +303,13 @@ Set the table style in config or via environment variable:
 
 ```bash
 # ASCII style (default)
-export EVER_SO_POWERFUL_GO_OUTPUT_TABLE_STYLE=ascii
+export TERMPLATE_OUTPUT_TABLE_STYLE=ascii
 
 # Unicode style (pretty box characters)
-export EVER_SO_POWERFUL_GO_OUTPUT_TABLE_STYLE=unicode
+export TERMPLATE_OUTPUT_TABLE_STYLE=unicode
 
 # Markdown style
-export EVER_SO_POWERFUL_GO_OUTPUT_TABLE_STYLE=markdown
+export TERMPLATE_OUTPUT_TABLE_STYLE=markdown
 ```
 
 ## Examples
@@ -317,7 +317,7 @@ export EVER_SO_POWERFUL_GO_OUTPUT_TABLE_STYLE=markdown
 ### Example 1: API Client Configuration
 
 ```yaml
-# ~/.ever-so-powerful-go.yaml
+# ~/.termplate.yaml
 api:
   base_url: https://api.github.com
   token: ${GITHUB_TOKEN}
@@ -466,7 +466,7 @@ api:
 EOF
 
 # Run with test config
-./build/bin/ever-so-powerful-go --config test-config.yaml example greet --name "Test"
+./build/bin/termplate --config test-config.yaml example greet --name "Test"
 ```
 
 ## Configuration Priority
@@ -474,8 +474,8 @@ EOF
 Configuration values are resolved in this order (highest to lowest priority):
 
 1. **Command-line flags**: `--verbose`
-2. **Environment variables**: `EVER_SO_POWERFUL_GO_VERBOSE=true`
-3. **Config file**: `verbose: true` in `~/.ever-so-powerful-go.yaml`
+2. **Environment variables**: `TERMPLATE_VERBOSE=true`
+3. **Config file**: `verbose: true` in `~/.termplate.yaml`
 4. **Defaults**: Set in `internal/config/defaults.go`
 
 ## Best Practices

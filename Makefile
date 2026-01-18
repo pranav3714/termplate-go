@@ -1,4 +1,4 @@
-BINARY_NAME := ever-so-powerful-go
+BINARY_NAME := termplate
 MODULE := $(shell go list -m)
 VERSION := $(shell git describe --tags --always --dirty 2>/dev/null || echo "dev")
 COMMIT := $(shell git rev-parse --short HEAD 2>/dev/null || echo "unknown")

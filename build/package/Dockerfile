@@ -21,10 +21,10 @@ ARG DATE=unknown
 # Build the binary
 RUN CGO_ENABLED=0 go build \
     -ldflags "-s -w \
-    -X github.com/blacksilver/ever-so-powerful/pkg/version.Version=${VERSION} \
-    -X github.com/blacksilver/ever-so-powerful/pkg/version.Commit=${COMMIT} \
-    -X github.com/blacksilver/ever-so-powerful/pkg/version.Date=${DATE}" \
-    -o /ever-so-powerful-go .
+    -X github.com/blacksilver/termplate-go/pkg/version.Version=${VERSION} \
+    -X github.com/blacksilver/termplate-go/pkg/version.Commit=${COMMIT} \
+    -X github.com/blacksilver/termplate-go/pkg/version.Date=${DATE}" \
+    -o /termplate .
 
 # Runtime stage
 FROM alpine:3.19
@@ -37,7 +37,7 @@ RUN adduser -D appuser
 USER appuser
 
 # Copy binary from builder
-COPY --from=builder /ever-so-powerful-go /usr/local/bin/
+COPY --from=builder /termplate /usr/local/bin/
 
-ENTRYPOINT ["ever-so-powerful-go"]
+ENTRYPOINT ["termplate"]
 CMD ["--help"]

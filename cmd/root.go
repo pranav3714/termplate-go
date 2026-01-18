@@ -11,9 +11,9 @@ import (
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 
-	"github.com/blacksilver/ever-so-powerful/cmd/example"
-	"github.com/blacksilver/ever-so-powerful/internal/config"
-	"github.com/blacksilver/ever-so-powerful/internal/logger"
+	"github.com/blacksilver/termplate-go/cmd/example"
+	"github.com/blacksilver/termplate-go/internal/config"
+	"github.com/blacksilver/termplate-go/internal/logger"
 )
 
 var (
@@ -23,9 +23,9 @@ var (
 )
 
 var rootCmd = &cobra.Command{
-	Use:   "ever-so-powerful-go",
-	Short: "A powerful CLI tool for developers",
-	Long: `ever-so-powerful-go is a production-ready CLI tool built with Go.
+	Use:   "termplate",
+	Short: "Termplate Go - A powerful CLI template for developers",
+	Long: `Termplate Go is a production-ready CLI tool template built with Go.
 
 It demonstrates best practices for building CLI applications with:
 - Cobra for command structure
@@ -34,9 +34,9 @@ It demonstrates best practices for building CLI applications with:
 - Clean architecture patterns
 
 Examples:
-  ever-so-powerful-go --help
-  ever-so-powerful-go version
-  ever-so-powerful-go example greet --name World`,
+  termplate --help
+  termplate version
+  termplate example greet --name World`,
 
 	// Runs before any subcommand
 	PersistentPreRunE: func(cmd *cobra.Command, _ []string) error {
@@ -88,7 +88,7 @@ func init() {
 		&cfgFile,
 		"config", "c",
 		"",
-		"config file (default: $HOME/.ever-so-powerful-go.yaml)",
+		"config file (default: $HOME/.termplate.yaml)",
 	)
 	rootCmd.PersistentFlags().BoolVarP(
 		&verbose,
@@ -127,7 +127,7 @@ func initConfig() {
 	}
 
 	// Environment variables
-	viper.SetEnvPrefix("EVER_SO_POWERFUL_GO")
+	viper.SetEnvPrefix("TERMPLATE")
 	viper.AutomaticEnv()
 
 	// Set defaults

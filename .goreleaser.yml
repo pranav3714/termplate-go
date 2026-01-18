@@ -1,18 +1,18 @@
 version: 2
-project_name: ever-so-powerful-go
+project_name: termplate
 
 builds:
-  - id: ever-so-powerful-go
+  - id: termplate
     main: .
-    binary: ever-so-powerful-go
+    binary: termplate
     env: [CGO_ENABLED=0]
     goos: [linux, darwin, windows]
     goarch: [amd64, arm64]
     ldflags:
       - -s -w
-      - -X github.com/blacksilver/ever-so-powerful/pkg/version.Version={{.Version}}
-      - -X github.com/blacksilver/ever-so-powerful/pkg/version.Commit={{.Commit}}
-      - -X github.com/blacksilver/ever-so-powerful/pkg/version.Date={{.Date}}
+      - -X github.com/blacksilver/termplate-go/pkg/version.Version={{.Version}}
+      - -X github.com/blacksilver/termplate-go/pkg/version.Commit={{.Commit}}
+      - -X github.com/blacksilver/termplate-go/pkg/version.Date={{.Date}}
 
 archives:
   - formats: [tar.gz]
@@ -35,4 +35,4 @@ changelog:
 release:
   github:
     owner: blacksilver
-    name: ever-so-powerful
+    name: termplate-go

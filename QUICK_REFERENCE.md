@@ -29,7 +29,7 @@ import (
     "context"
     "fmt"
     "github.com/spf13/cobra"
-    "github.com/blacksilver/ever-so-powerful/internal/handler"
+    "github.com/blacksilver/termplate/internal/handler"
 )
 
 var myFlag string
@@ -52,7 +52,7 @@ func init() {
 
 ```go
 // cmd/root.go
-import "github.com/blacksilver/ever-so-powerful/cmd/mycommand"
+import "github.com/blacksilver/termplate/cmd/mycommand"
 
 func init() {
     // ... existing code ...
@@ -69,8 +69,8 @@ package handler
 import (
     "context"
     "fmt"
-    "github.com/blacksilver/ever-so-powerful/internal/model"
-    "github.com/blacksilver/ever-so-powerful/internal/service/myservice"
+    "github.com/blacksilver/termplate/internal/model"
+    "github.com/blacksilver/termplate/internal/service/myservice"
 )
 
 type MyInput struct {
@@ -174,8 +174,8 @@ value := viper.GetString("myfeature.setting1")
 
 ```go
 import (
-    "github.com/blacksilver/ever-so-powerful/internal/config"
-    "github.com/blacksilver/ever-so-powerful/internal/output"
+    "github.com/blacksilver/termplate/internal/config"
+    "github.com/blacksilver/termplate/internal/output"
 )
 
 cfg, _ := config.Load()
@@ -324,26 +324,26 @@ make audit
 
 ```bash
 # General
-export EVER_SO_POWERFUL_GO_VERBOSE=true
-export EVER_SO_POWERFUL_GO_LOG_LEVEL=debug
+export TERMPLATE_VERBOSE=true
+export TERMPLATE_LOG_LEVEL=debug
 
 # Output
-export EVER_SO_POWERFUL_GO_OUTPUT_FORMAT=json
-export EVER_SO_POWERFUL_GO_OUTPUT_COLOR=false
+export TERMPLATE_OUTPUT_FORMAT=json
+export TERMPLATE_OUTPUT_COLOR=false
 
 # API
-export EVER_SO_POWERFUL_GO_API_KEY=xxx
-export EVER_SO_POWERFUL_GO_API_BASE_URL=https://api.example.com
+export TERMPLATE_API_KEY=xxx
+export TERMPLATE_API_BASE_URL=https://api.example.com
 
 # Files
-export EVER_SO_POWERFUL_GO_FILES_INPUT_DIR=/path/to/input
-export EVER_SO_POWERFUL_GO_FILES_OUTPUT_DIR=/path/to/output
+export TERMPLATE_FILES_INPUT_DIR=/path/to/input
+export TERMPLATE_FILES_OUTPUT_DIR=/path/to/output
 
 # Database
-export EVER_SO_POWERFUL_GO_DB_USER=user
-export EVER_SO_POWERFUL_GO_DB_PASSWORD=pass
-export EVER_SO_POWERFUL_GO_DB_HOST=localhost
-export EVER_SO_POWERFUL_GO_DB_PORT=5432
+export TERMPLATE_DB_USER=user
+export TERMPLATE_DB_PASSWORD=pass
+export TERMPLATE_DB_HOST=localhost
+export TERMPLATE_DB_PORT=5432
 ```
 
 ## Configuration Files
@@ -353,8 +353,8 @@ export EVER_SO_POWERFUL_GO_DB_PORT=5432
 configs/config.example.yaml
 
 # User config locations (in priority order)
-~/.ever-so-powerful-go.yaml   # Home directory
-./.ever-so-powerful-go.yaml   # Current directory
+~/.termplate.yaml   # Home directory
+./.termplate.yaml   # Current directory
 --config /path/to/config.yaml # Via flag
 ```
 

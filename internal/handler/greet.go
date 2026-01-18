@@ -4,8 +4,8 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/blacksilver/ever-so-powerful/internal/model"
-	"github.com/blacksilver/ever-so-powerful/internal/service/example"
+	"github.com/blacksilver/termplate-go/internal/model"
+	"github.com/blacksilver/termplate-go/internal/service/example"
 )
 
 type GreetInput struct {

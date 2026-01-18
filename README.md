@@ -1,9 +1,9 @@
-# ever-so-powerful-go
+# Termplate Go
 
 > **For AI Models**: Start with [PROJECT_CONTEXT.md](PROJECT_CONTEXT.md) for complete project context, then [AI_GUIDE.md](AI_GUIDE.md) for analysis workflows. See [DOCUMENTATION_INDEX.md](DOCUMENTATION_INDEX.md) for complete documentation map.
 > **For Developers**: See [Documentation](#documentation) section below for guides.
 
-A production-ready Go CLI tool built with best practices and a strong foundation. Designed for developers who need API interaction, file processing, database operations, and flexible output formatting.
+A production-ready Go CLI tool template built with best practices and a strong foundation. Designed for developers who need API interaction, file processing, database operations, and flexible output formatting.
 
 ## Features
 
@@ -33,8 +33,8 @@ A production-ready Go CLI tool built with best practices and a strong foundation
 
 ```bash
 # Clone the repository
-git clone https://github.com/blacksilver/ever-so-powerful.git
-cd ever-so-powerful
+git clone https://github.com/blacksilver/termplate.git
+cd termplate
 
 # Install dependencies
 go mod download
@@ -43,29 +43,29 @@ go mod download
 make build
 
 # Or build manually
-go build -o build/bin/ever-so-powerful-go .
+go build -o build/bin/termplate .
 ```
 
 ### Usage
 
 ```bash
 # Show help
-./build/bin/ever-so-powerful-go --help
+./build/bin/termplate --help
 
 # Show version
-./build/bin/ever-so-powerful-go version
+./build/bin/termplate version
 
 # Show version in JSON format
-./build/bin/ever-so-powerful-go version --output json
+./build/bin/termplate version --output json
 
 # Run example command
-./build/bin/ever-so-powerful-go example greet --name "World"
+./build/bin/termplate example greet --name "World"
 
 # With verbose logging
-./build/bin/ever-so-powerful-go -v example greet --name "User" --uppercase
+./build/bin/termplate -v example greet --name "User" --uppercase
 
 # Generate shell completion
-./build/bin/ever-so-powerful-go completion bash > /etc/bash_completion.d/ever-so-powerful-go
+./build/bin/termplate completion bash > /etc/bash_completion.d/termplate
 ```
 
 ## Configuration
@@ -73,24 +73,24 @@ go build -o build/bin/ever-so-powerful-go .
 Configuration can be loaded from:
 
 1. **Command line flag**: `--config /path/to/config.yaml`
-2. **Home directory**: `~/.ever-so-powerful-go.yaml`
-3. **Current directory**: `./.ever-so-powerful-go.yaml`
-4. **Environment variables**: `EVER_SO_POWERFUL_GO_*`
+2. **Home directory**: `~/.termplate.yaml`
+3. **Current directory**: `./.termplate.yaml`
+4. **Environment variables**: `TERMPLATE_*`
 
 ### Quick Setup
 
 ```bash
 # Copy example configuration
-cp configs/config.example.yaml ~/.ever-so-powerful-go.yaml
+cp configs/config.example.yaml ~/.termplate.yaml
 
 # Edit with your settings
-vim ~/.ever-so-powerful-go.yaml
+vim ~/.termplate.yaml
 
 # Or use environment variables
-export EVER_SO_POWERFUL_GO_API_KEY=your-api-key
-export EVER_SO_POWERFUL_GO_OUTPUT_FORMAT=json
-export EVER_SO_POWERFUL_GO_DB_USER=dbuser
-export EVER_SO_POWERFUL_GO_DB_PASSWORD=dbpass
+export TERMPLATE_API_KEY=your-api-key
+export TERMPLATE_OUTPUT_FORMAT=json
+export TERMPLATE_DB_USER=dbuser
+export TERMPLATE_DB_PASSWORD=dbpass
 ```
 
 See [Configuration Guide](docs/CONFIGURATION_GUIDE.md) for detailed documentation.
@@ -167,7 +167,7 @@ make clean
 ## Project Structure
 
 ```
-ever-so-powerful/
+termplate/
 ├── cmd/                          # CLI commands (Cobra)
 │   ├── root.go                   # Root command with global flags
 │   ├── version.go                # Version command
@@ -201,7 +201,7 @@ package mycommand
 
 import (
     "github.com/spf13/cobra"
-    "github.com/blacksilver/ever-so-powerful/internal/handler"
+    "github.com/blacksilver/termplate/internal/handler"
 )
 
 var Cmd = &cobra.Command{
@@ -217,7 +217,7 @@ var Cmd = &cobra.Command{
 Register in `cmd/root.go`:
 
 ```go
-import "github.com/blacksilver/ever-so-powerful/cmd/mycommand"
+import "github.com/blacksilver/termplate/cmd/mycommand"
 
 func init() {
     rootCmd.AddCommand(mycommand.Cmd)
@@ -300,10 +300,10 @@ make build-all
 
 ```bash
 # Build Docker image
-docker build -f build/package/Dockerfile -t ever-so-powerful-go:latest .
+docker build -f build/package/Dockerfile -t termplate:latest .
 
 # Run Docker container
-docker run --rm ever-so-powerful-go:latest version
+docker run --rm termplate:latest version
 ```
 
 ## Releasing
@@ -326,16 +326,16 @@ Generate shell completion scripts:
 
 ```bash
 # Bash
-ever-so-powerful-go completion bash > /etc/bash_completion.d/ever-so-powerful-go
+termplate completion bash > /etc/bash_completion.d/termplate
 
 # Zsh
-ever-so-powerful-go completion zsh > "${fpath[1]}/_ever-so-powerful-go"
+termplate completion zsh > "${fpath[1]}/_termplate"
 
 # Fish
-ever-so-powerful-go completion fish > ~/.config/fish/completions/ever-so-powerful-go.fish
+termplate completion fish > ~/.config/fish/completions/termplate.fish
 
 # PowerShell
-ever-so-powerful-go completion powershell | Out-String | Invoke-Expression
+termplate completion powershell | Out-String | Invoke-Expression
 ```
 
 ## Architecture

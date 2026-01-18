@@ -19,4 +19,4 @@ coverage.out
 
 # Config
 .env
-.ever-so-powerful-go.yaml
+.termplate.yaml

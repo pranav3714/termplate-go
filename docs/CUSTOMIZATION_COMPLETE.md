@@ -6,12 +6,12 @@ Your Go CLI tool has been fully customized and is ready to use.
 
 ### ✅ Module Path
 - **Old**: `github.com/yourorg/mycli`
-- **New**: `github.com/blacksilver/ever-so-powerful`
+- **New**: `github.com/blacksilver/termplate`
 - Updated in: `go.mod`, all `.go` files, `.goreleaser.yml`, `Dockerfile`
 
 ### ✅ Binary Name
 - **Old**: `mycli`
-- **New**: `ever-so-powerful-go`
+- **New**: `termplate`
 - Updated in: `Makefile`, `.goreleaser.yml`, `Dockerfile`, all command files
 
 ### ✅ CLI Description
@@ -20,11 +20,11 @@ Your Go CLI tool has been fully customized and is ready to use.
 - **Updated** config file paths and environment variable prefix
 
 ### ✅ Environment Variables
-- **Prefix**: `EVER_SO_POWERFUL_GO_`
-- Example: `EVER_SO_POWERFUL_GO_VERBOSE=true`
+- **Prefix**: `TERMPLATE_`
+- Example: `TERMPLATE_VERBOSE=true`
 
 ### ✅ Configuration File
-- **Path**: `~/.ever-so-powerful-go.yaml` or `./.ever-so-powerful-go.yaml`
+- **Path**: `~/.termplate.yaml` or `./.termplate.yaml`
 - **Example**: `configs/config.example.yaml`
 
 ### ✅ Development Tools Installed
@@ -38,22 +38,22 @@ Your Go CLI tool has been fully customized and is ready to use.
 ```bash
 # Binary builds successfully
 $ make build
-✅ Built: ./build/bin/ever-so-powerful-go
+✅ Built: ./build/bin/termplate
 
 # Help works
-$ ./build/bin/ever-so-powerful-go --help
+$ ./build/bin/termplate --help
 ✅ Shows customized description and examples
 
 # Version works
-$ ./build/bin/ever-so-powerful-go version
-✅ ever-so-powerful-go dev (commit: unknown, built: 2026-01-17T23:12:19Z, go1.24.12)
+$ ./build/bin/termplate version
+✅ termplate dev (commit: unknown, built: 2026-01-17T23:12:19Z, go1.24.12)
 
 # Version JSON format works
-$ ./build/bin/ever-so-powerful-go version --output json
+$ ./build/bin/termplate version --output json
 ✅ Returns proper JSON
 
 # Example command works
-$ ./build/bin/ever-so-powerful-go example greet --name "Developer" --uppercase
+$ ./build/bin/termplate example greet --name "Developer" --uppercase
 ✅ HELLO, DEVELOPER! WELCOME TO EVER-SO-POWERFUL-GO.
 
 # Tests pass
@@ -70,12 +70,12 @@ Run these commands to verify everything:
 make build
 
 # Test basic commands
-./build/bin/ever-so-powerful-go --help
-./build/bin/ever-so-powerful-go version
-./build/bin/ever-so-powerful-go example greet --name "World"
+./build/bin/termplate --help
+./build/bin/termplate version
+./build/bin/termplate example greet --name "World"
 
 # Test with flags
-./build/bin/ever-so-powerful-go -v example greet --name "User" --uppercase
+./build/bin/termplate -v example greet --name "User" --uppercase
 
 # Run quality checks (may take a minute)
 make fmt
@@ -89,7 +89,7 @@ make vet
 ```bash
 git init
 git add .
-git commit -m "Initial commit: ever-so-powerful-go CLI"
+git commit -m "Initial commit: termplate CLI"
 
 # Install git hooks for automatic formatting/linting
 lefthook install
@@ -106,7 +106,7 @@ rm internal/handler/greet.go
 rm -rf internal/service/example
 
 # Edit cmd/root.go - remove these lines:
-# - import "github.com/blacksilver/ever-so-powerful/cmd/example"
+# - import "github.com/blacksilver/termplate/cmd/example"
 # - rootCmd.AddCommand(example.Cmd)
 
 # Rebuild
@@ -140,7 +140,7 @@ If using GitHub:
 
 ```bash
 # Push to GitHub
-git remote add origin https://github.com/blacksilver/ever-so-powerful.git
+git remote add origin https://github.com/blacksilver/termplate.git
 git push -u origin main
 
 # GitHub Actions workflows are already configured:
@@ -164,10 +164,10 @@ git push origin v0.1.0
 ## Project Structure
 
 ```
-ever-so-powerful/
+termplate/
 ├── build/
 │   └── bin/
-│       └── ever-so-powerful-go    ← Your compiled binary
+│       └── termplate    ← Your compiled binary
 ├── cmd/
 │   ├── root.go                     ← Root command (customized)
 │   ├── version.go                  ← Version command
@@ -211,7 +211,7 @@ make clean        # Remove build artifacts
 
 ### Using Config File
 
-Create `~/.ever-so-powerful-go.yaml`:
+Create `~/.termplate.yaml`:
 
 ```yaml
 verbose: true
@@ -230,17 +230,17 @@ api:
 ### Using Environment Variables
 
 ```bash
-export EVER_SO_POWERFUL_GO_VERBOSE=true
-export EVER_SO_POWERFUL_GO_LOG_LEVEL=debug
-export EVER_SO_POWERFUL_GO_API_KEY=your-api-key
+export TERMPLATE_VERBOSE=true
+export TERMPLATE_LOG_LEVEL=debug
+export TERMPLATE_API_KEY=your-api-key
 
-./build/bin/ever-so-powerful-go example greet --name "World"
+./build/bin/termplate example greet --name "World"
 ```
 
 ### Using Flags
 
 ```bash
-./build/bin/ever-so-powerful-go --verbose --output json example greet --name "World"
+./build/bin/termplate --verbose --output json example greet --name "World"
 ```
 
 ## Development Workflow
@@ -261,7 +261,7 @@ make lint
 make build
 
 # 6. Test binary
-./build/bin/ever-so-powerful-go [command]
+./build/bin/termplate [command]
 
 # Or run everything at once:
 make audit && make build
@@ -273,27 +273,27 @@ Generate completion scripts for your shell:
 
 ```bash
 # Bash
-./build/bin/ever-so-powerful-go completion bash > /etc/bash_completion.d/ever-so-powerful-go
+./build/bin/termplate completion bash > /etc/bash_completion.d/termplate
 
 # Zsh
-./build/bin/ever-so-powerful-go completion zsh > "${fpath[1]}/_ever-so-powerful-go"
+./build/bin/termplate completion zsh > "${fpath[1]}/_termplate"
 
 # Fish
-./build/bin/ever-so-powerful-go completion fish > ~/.config/fish/completions/ever-so-powerful-go.fish
+./build/bin/termplate completion fish > ~/.config/fish/completions/termplate.fish
 
 # PowerShell
-./build/bin/ever-so-powerful-go completion powershell | Out-String | Invoke-Expression
+./build/bin/termplate completion powershell | Out-String | Invoke-Expression
 ```
 
 ## Docker Build (Optional)
 
 ```bash
 # Build Docker image
-docker build -f build/package/Dockerfile -t ever-so-powerful-go:latest .
+docker build -f build/package/Dockerfile -t termplate:latest .
 
 # Run in container
-docker run --rm ever-so-powerful-go:latest version
-docker run --rm ever-so-powerful-go:latest example greet --name "Container"
+docker run --rm termplate:latest version
+docker run --rm termplate:latest example greet --name "Container"
 ```
 
 ## Architecture Recap
@@ -340,7 +340,7 @@ Either way, you have a solid foundation following Go best practices!
 ```bash
 # Quick start
 make build
-./build/bin/ever-so-powerful-go --help
+./build/bin/termplate --help
 ```
 
 Happy coding! 🎉

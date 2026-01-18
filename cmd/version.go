@@ -7,7 +7,7 @@ import (
 	"github.com/spf13/cobra"
 	"gopkg.in/yaml.v3"
 
-	"github.com/blacksilver/ever-so-powerful/pkg/version"
+	"github.com/blacksilver/termplate-go/pkg/version"
 )
 
 var versionCmd = &cobra.Command{
@@ -31,7 +31,7 @@ var versionCmd = &cobra.Command{
 			}
 			fmt.Print(string(data))
 		default:
-			fmt.Printf("ever-so-powerful-go %s\n", info.String())
+			fmt.Printf("Termplate Go %s\n", info.String())
 		}
 
 		return nil

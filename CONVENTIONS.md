@@ -51,7 +51,7 @@ Entities:           internal/model/      (domain models)
 ### Standard Locations
 
 ```
-ever-so-powerful/
+termplate/
 ├── cmd/                    # Commands ONLY (thin layer)
 │   ├── root.go            # Root command + flags
 │   ├── <feature>/         # Feature command groups
@@ -130,9 +130,9 @@ const defaultTimeout = 30     # Internal: camelCase
 ### Command Names
 
 ```
-ever-so-powerful-go process           # lowercase
-ever-so-powerful-go process-file      # hyphenated
-ever-so-powerful-go api fetch-data    # nested with hyphens
+termplate process           # lowercase
+termplate process-file      # hyphenated
+termplate api fetch-data    # nested with hyphens
 ```
 
 ## Code Patterns
@@ -147,7 +147,7 @@ package mycommand
 import (
     "context"
     "github.com/spf13/cobra"
-    "github.com/blacksilver/ever-so-powerful/internal/handler"
+    "github.com/blacksilver/termplate/internal/handler"
 )
 
 // Flag variables
@@ -479,12 +479,12 @@ database.driver
 
 ### Environment Variables
 
-Prefix: `EVER_SO_POWERFUL_GO_`
+Prefix: `TERMPLATE_`
 
 ```bash
-EVER_SO_POWERFUL_GO_API_KEY=xxx
-EVER_SO_POWERFUL_GO_OUTPUT_FORMAT=json
-EVER_SO_POWERFUL_GO_DB_PASSWORD=xxx
+TERMPLATE_API_KEY=xxx
+TERMPLATE_OUTPUT_FORMAT=json
+TERMPLATE_DB_PASSWORD=xxx
 ```
 
 ## Documentation
@@ -546,9 +546,9 @@ func (h *MyHandler) Execute(ctx context.Context, in Input) (*Output, error) {}
 ### Command Naming
 
 ```
-ever-so-powerful-go command              # Single word
-ever-so-powerful-go parent child         # Nested
-ever-so-powerful-go multi-word-command   # Hyphenated
+termplate command              # Single word
+termplate parent child         # Nested
+termplate multi-word-command   # Hyphenated
 ```
 
 ### Help Text
@@ -561,8 +561,8 @@ var Cmd = &cobra.Command{
 
 Explains what the command does, when to use it,
 and any important notes.`,
-    Example: `  ever-so-powerful-go command --flag value
-  ever-so-powerful-go command --another-flag`,
+    Example: `  termplate command --flag value
+  termplate command --another-flag`,
 }
 ```
 

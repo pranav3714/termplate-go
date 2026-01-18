@@ -4,10 +4,10 @@
 
 ## Quick Project Overview
 
-- **Project Name**: ever-so-powerful-go
-- **Type**: Production-ready Go CLI tool
-- **Module**: `github.com/blacksilver/ever-so-powerful`
-- **Binary**: `ever-so-powerful-go`
+- **Project Name**: Termplate Go
+- **Type**: Production-ready Go CLI tool template
+- **Module**: `github.com/blacksilver/termplate-go`
+- **Binary**: `termplate`
 - **Purpose**: Multi-purpose development CLI with API client, file processing, and database capabilities
 
 ## Project State
@@ -46,7 +46,7 @@ internal/model/             # Domain entities (no dependencies)
 ### Directory Structure
 
 ```
-ever-so-powerful/
+termplate/
 ├── cmd/                    # CLI commands (thin wiring only)
 │   ├── root.go            # Root command + global flags
 │   ├── version.go         # Version command
@@ -161,12 +161,12 @@ ever-so-powerful/
 
 ### Environment Variables
 
-Prefix: `EVER_SO_POWERFUL_GO_`
+Prefix: `TERMPLATE_`
 
 Examples:
-- `EVER_SO_POWERFUL_GO_API_KEY`
-- `EVER_SO_POWERFUL_GO_OUTPUT_FORMAT`
-- `EVER_SO_POWERFUL_GO_DB_PASSWORD`
+- `TERMPLATE_API_KEY`
+- `TERMPLATE_OUTPUT_FORMAT`
+- `TERMPLATE_DB_PASSWORD`
 
 ## Development Workflow
 
@@ -204,7 +204,7 @@ package mycommand
 
 import (
     "github.com/spf13/cobra"
-    "github.com/blacksilver/ever-so-powerful/internal/handler"
+    "github.com/blacksilver/termplate/internal/handler"
 )
 
 var Cmd = &cobra.Command{
@@ -360,8 +360,8 @@ func TestService_DoSomething(t *testing.T) {
 
 ```bash
 make build                              # Build binary
-./build/bin/ever-so-powerful-go --help  # Run CLI
-./build/bin/ever-so-powerful-go version # Check version
+./build/bin/termplate --help  # Run CLI
+./build/bin/termplate version # Check version
 ```
 
 ### Development
@@ -422,10 +422,10 @@ When analyzing this project:
 ## Build Information
 
 - **Go Version**: 1.22+
-- **Module**: `github.com/blacksilver/ever-so-powerful`
-- **Binary**: `ever-so-powerful-go`
+- **Module**: `github.com/blacksilver/termplate`
+- **Binary**: `termplate`
 - **Build Command**: `make build`
-- **Output**: `./build/bin/ever-so-powerful-go`
+- **Output**: `./build/bin/termplate`
 
 ## Contact & Resources
 

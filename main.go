@@ -3,7 +3,7 @@ package main
 import (
 	"os"
 
-	"github.com/blacksilver/ever-so-powerful/cmd"
+	"github.com/blacksilver/termplate-go/cmd"
 )
 
 func main() {

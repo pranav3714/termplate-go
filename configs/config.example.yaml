@@ -1,7 +1,7 @@
-# ever-so-powerful-go configuration
-# Copy this file to ~/.ever-so-powerful-go.yaml or ./.ever-so-powerful-go.yaml
-# All settings can be overridden with environment variables using EVER_SO_POWERFUL_GO_ prefix
-# Example: EVER_SO_POWERFUL_GO_VERBOSE=true
+# Termplate Go configuration
+# Copy this file to ~/.termplate.yaml or ./.termplate.yaml
+# All settings can be overridden with environment variables using TERMPLATE_ prefix
+# Example: TERMPLATE_VERBOSE=true
 
 # ============================================================================
 # General Settings
@@ -45,9 +45,9 @@ api:
   base_url: https://api.example.com
 
   # API authentication (set one of these)
-  key: ${EVER_SO_POWERFUL_GO_API_KEY}      # API key
-  secret: ${EVER_SO_POWERFUL_GO_API_SECRET} # API secret
-  token: ${EVER_SO_POWERFUL_GO_API_TOKEN}  # Bearer token
+  key: ${TERMPLATE_API_KEY}      # API key
+  secret: ${TERMPLATE_API_SECRET} # API secret
+  token: ${TERMPLATE_API_TOKEN}  # Bearer token
 
   # Request timeout
   timeout: 30s
@@ -65,7 +65,7 @@ api:
   verify_ssl: true
 
   # User agent string
-  user_agent: "ever-so-powerful-go/1.0"
+  user_agent: "termplate/1.0"
 
   # Custom headers to include in all requests
   headers:
@@ -170,10 +170,10 @@ database:
   database: mydb
 
   # Database username
-  username: ${EVER_SO_POWERFUL_GO_DB_USER}
+  username: ${TERMPLATE_DB_USER}
 
   # Database password (use environment variable for security)
-  password: ${EVER_SO_POWERFUL_GO_DB_PASSWORD}
+  password: ${TERMPLATE_DB_PASSWORD}
 
   # SSL mode: disable, require, verify-ca, verify-full (postgres)
   ssl_mode: disable
@@ -202,14 +202,14 @@ database:
 #
 # You can override any setting with environment variables:
 #
-# export EVER_SO_POWERFUL_GO_VERBOSE=true
-# export EVER_SO_POWERFUL_GO_LOG_LEVEL=debug
-# export EVER_SO_POWERFUL_GO_OUTPUT_FORMAT=json
-# export EVER_SO_POWERFUL_GO_API_KEY=your-api-key
-# export EVER_SO_POWERFUL_GO_API_BASE_URL=https://your-api.com
-# export EVER_SO_POWERFUL_GO_DB_USER=dbuser
-# export EVER_SO_POWERFUL_GO_DB_PASSWORD=dbpass
-# export EVER_SO_POWERFUL_GO_FILES_INPUT_DIR=/path/to/input
-# export EVER_SO_POWERFUL_GO_FILES_OUTPUT_DIR=/path/to/output
+# export TERMPLATE_VERBOSE=true
+# export TERMPLATE_LOG_LEVEL=debug
+# export TERMPLATE_OUTPUT_FORMAT=json
+# export TERMPLATE_API_KEY=your-api-key
+# export TERMPLATE_API_BASE_URL=https://your-api.com
+# export TERMPLATE_DB_USER=dbuser
+# export TERMPLATE_DB_PASSWORD=dbpass
+# export TERMPLATE_FILES_INPUT_DIR=/path/to/input
+# export TERMPLATE_FILES_OUTPUT_DIR=/path/to/output
 #
 # ============================================================================

@@ -10,7 +10,7 @@ import (
 
 	"gopkg.in/yaml.v3"
 
-	"github.com/blacksilver/ever-so-powerful/internal/config"
+	"github.com/blacksilver/termplate-go/internal/config"
 )
 
 // Formatter handles formatting output in different formats

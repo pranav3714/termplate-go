@@ -29,7 +29,7 @@ func SetDefaults() {
 	viper.SetDefault("api.retry_delay", 1*time.Second)
 	viper.SetDefault("api.follow_redirects", true)
 	viper.SetDefault("api.verify_ssl", true)
-	viper.SetDefault("api.user_agent", "ever-so-powerful-go/1.0")
+	viper.SetDefault("api.user_agent", "termplate/1.0")
 	viper.SetDefault("api.rate_limit_per_sec", 10)
 
 	// Server settings

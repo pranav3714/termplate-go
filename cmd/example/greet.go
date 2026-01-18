@@ -7,7 +7,7 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/blacksilver/ever-so-powerful/internal/handler"
+	"github.com/blacksilver/termplate-go/internal/handler"
 )
 
 var (

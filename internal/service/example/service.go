@@ -21,7 +21,7 @@ func (s *Service) GenerateGreeting(ctx context.Context, name string, uppercase b
 		"uppercase", uppercase,
 	)
 
-	message := fmt.Sprintf("Hello, %s! Welcome to ever-so-powerful-go.", name)
+	message := fmt.Sprintf("Hello, %s! Welcome to Termplate Go.", name)
 
 	if uppercase {
 		message = strings.ToUpper(message)
