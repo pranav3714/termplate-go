@@ -8,6 +8,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Changed
+- Updated all dependencies to latest versions:
+  - github.com/google/go-cmp: v0.6.0 → v0.7.0
+  - github.com/rogpeppe/go-internal: v1.9.0 → v1.14.1
+  - gopkg.in/check.v1: updated to latest patch
+  - golang.org/x/mod: v0.31.0 → v0.32.0
+  - golang.org/x/tools: v0.40.0 → v0.41.0
+  - github.com/cpuguy83/go-md2man/v2: v2.0.6 → v2.0.7
+
+## [0.1.1] - 2026-01-18
+
+### Changed
 - Renamed project from "ever-so-powerful-go" to "Termplate Go"
 - Updated all documentation with new project name
 - Enhanced .gitignore to prevent secret commits
@@ -105,8 +116,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Links
 
-- [Unreleased changes](https://github.com/pranav3714/termplate-go/compare/v0.1.0...HEAD)
+- [Unreleased changes](https://github.com/pranav3714/termplate-go/compare/v0.1.1...HEAD)
 - [All releases](https://github.com/pranav3714/termplate-go/releases)
 
-[Unreleased]: https://github.com/pranav3714/termplate-go/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/pranav3714/termplate-go/compare/v0.1.1...HEAD
+[0.1.1]: https://github.com/pranav3714/termplate-go/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/pranav3714/termplate-go/releases/tag/v0.1.0
