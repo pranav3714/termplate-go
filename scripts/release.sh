@@ -75,6 +75,7 @@ AUTO_CONFIRM=false
 VERSION=""
 AUTO_INCREMENT=""
 RELEASE_NOTES=""
+PREV_VERSION=""  # Store previous version for comparison links
 
 # ============================================================================
 # Helper Functions
@@ -198,6 +199,7 @@ validate_prerequisites() {
     if [[ -n $(git status --porcelain) ]]; then
         error "Working directory is not clean"
         info "Please commit or stash your changes first"
+        echo ""
         git status --short
         return 1
     fi
@@ -226,14 +228,18 @@ validate_prerequisites() {
     # Run tests unless skipped
     if [[ "$SKIP_TESTS" == "false" ]]; then
         info "Running tests..."
+        local start_time=$(date +%s)
         if ! make test > /dev/null 2>&1; then
             error "Tests failed"
+            info "Run 'make test' to see details"
             if ! confirm "Continue anyway?"; then
                 error "Aborted by user"
                 return 1
             fi
         else
-            success "Tests passed"
+            local end_time=$(date +%s)
+            local duration=$((end_time - start_time))
+            success "Tests passed (${duration}s)"
         fi
     else
         warning "Skipping tests (--skip-tests)"
@@ -242,14 +248,18 @@ validate_prerequisites() {
     # Run linters unless skipped
     if [[ "$SKIP_LINT" == "false" ]]; then
         info "Running linters..."
+        local start_time=$(date +%s)
         if ! make lint > /dev/null 2>&1; then
             error "Linters failed"
+            info "Run 'make lint' to see issues"
             if ! confirm "Continue anyway?"; then
                 error "Aborted by user"
                 return 1
             fi
         else
-            success "Linters passed"
+            local end_time=$(date +%s)
+            local duration=$((end_time - start_time))
+            success "Linters passed (${duration}s)"
         fi
     else
         warning "Skipping linters (--skip-lint)"
@@ -327,6 +337,13 @@ update_changelog() {
     cp "$changelog" "$CHANGELOG_BACKUP"
     info "Created backup: $CHANGELOG_BACKUP"
 
+    # Store previous version before any modifications
+    PREV_VERSION=$(grep -m 1 '^\[Unreleased\]:' "$changelog" | sed -n 's/.*compare\/\(v[0-9.]*\)\.\.\.HEAD/\1/p')
+    if [[ -z "$PREV_VERSION" ]]; then
+        PREV_VERSION=$(get_current_version)
+    fi
+    info "Previous version: $PREV_VERSION"
+
     # Parse unreleased section
     local unreleased_content
     unreleased_content=$(parse_unreleased_section "$changelog")
@@ -341,6 +358,14 @@ update_changelog() {
                 return 1
             fi
         fi
+    else
+        echo ""
+        info "Changes in this release:"
+        echo "$unreleased_content" | head -15
+        if [[ $(echo "$unreleased_content" | wc -l) -gt 15 ]]; then
+            info "... ($(echo "$unreleased_content" | wc -l) total lines)"
+        fi
+        echo ""
     fi
 
     # Read entire changelog
@@ -389,7 +414,14 @@ update_changelog() {
         echo "$new_changelog" > "$changelog"
         success "Updated CHANGELOG.md"
     else
-        info "[DRY RUN] Would update CHANGELOG.md"
+        info "[DRY RUN] Would update CHANGELOG.md with:"
+        echo ""
+        echo "  ## [${version#v}] - $date"
+        echo "$unreleased_content" | head -10 | sed 's/^/  /'
+        if [[ $(echo "$unreleased_content" | wc -l) -gt 10 ]]; then
+            info "  ... (and $(( $(echo "$unreleased_content" | wc -l) - 10 )) more lines)"
+        fi
+        echo ""
     fi
 
     return 0
@@ -401,12 +433,13 @@ update_version_links() {
 
     info "Updating version comparison links..."
 
-    # Get previous version from changelog
-    local prev_version
-    prev_version=$(grep -m 1 '^\[Unreleased\]:' "$changelog" | sed -n 's/.*compare\/\(v[0-9.]*\)\.\.\.HEAD/\1/p')
+    # Use the PREV_VERSION that was stored before CHANGELOG modification
+    local prev_version="$PREV_VERSION"
 
     if [[ -z "$prev_version" ]]; then
+        error "Previous version not detected"
         prev_version=$(get_current_version)
+        warning "Falling back to git tag: $prev_version"
     fi
 
     # Read current links section
@@ -429,10 +462,12 @@ update_version_links() {
         # Insert new version link after [Unreleased]
         sed -i "${links_start}a\\$new_version_link" "$changelog"
         success "Updated version links"
+        info "  [Unreleased]: ...compare/$version...HEAD"
+        info "  [${version#v}]: ...compare/$prev_version...$version"
     else
-        info "[DRY RUN] Would add links:"
-        info "  $new_unreleased_link"
-        info "  $new_version_link"
+        info "[DRY RUN] Would update links:"
+        info "  [Unreleased]: ...compare/$version...HEAD"
+        info "  [${version#v}]: ...compare/$prev_version...$version"
     fi
 
     return 0
@@ -452,16 +487,19 @@ create_git_tag() {
         git add "$CHANGELOG_FILE"
         success "Staged CHANGELOG.md"
     else
-        info "[DRY RUN] Would stage CHANGELOG.md"
+        info "[DRY RUN] Would stage: CHANGELOG.md"
     fi
 
     # Create commit
     local commit_message="chore: prepare release $version"
     if [[ "$DRY_RUN" == "false" ]]; then
         git commit -m "$commit_message"$'\n\n'"Co-Authored-By: Claude Sonnet 4.5 (1M context) <noreply@anthropic.com>"
-        success "Created commit"
+        local commit_sha=$(git rev-parse --short HEAD)
+        success "Created commit $commit_sha"
+        info "Message: $commit_message"
     else
-        info "[DRY RUN] Would create commit: $commit_message"
+        info "[DRY RUN] Would create commit:"
+        info "  $commit_message"
     fi
 
     # Get release notes from CHANGELOG
@@ -473,11 +511,21 @@ create_git_tag() {
 
     if [[ "$DRY_RUN" == "false" ]]; then
         git tag -a "$version" -m "$tag_message"
-        success "Created tag $version"
+        success "Created annotated tag $version"
+        echo ""
+        info "Tag contains:"
+        echo "$release_notes" | head -8 | sed 's/^/  /'
+        if [[ $(echo "$release_notes" | wc -l) -gt 8 ]]; then
+            info "  ... ($(echo "$release_notes" | wc -l) total lines)"
+        fi
     else
-        info "[DRY RUN] Would create tag: $version"
-        info "Tag message preview:"
-        echo "$tag_message" | head -n 10
+        info "[DRY RUN] Would create annotated tag: $version"
+        echo ""
+        info "Tag would contain:"
+        echo "$release_notes" | head -8 | sed 's/^/  /'
+        if [[ $(echo "$release_notes" | wc -l) -gt 8 ]]; then
+            info "  ... ($(echo "$release_notes" | wc -l) total lines)"
+        fi
     fi
 
     return 0
@@ -505,14 +553,18 @@ push_tag() {
         return 0
     fi
 
+    info "Pushing commit to main branch..."
     git push origin main
+    success "Pushed commit"
+
+    info "Pushing tag $version..."
     git push origin "$version"
-    success "Pushed tag to remote"
+    success "Pushed tag"
 
     echo ""
     success "Release $version initiated!"
-    info "GitHub Actions: https://github.com/$REPO_OWNER/$REPO_NAME/actions"
-    info "Releases: https://github.com/$REPO_OWNER/$REPO_NAME/releases"
+    info "GitHub Actions triggered: https://github.com/$REPO_OWNER/$REPO_NAME/actions"
+    echo ""
 
     return 0
 }
@@ -634,16 +686,34 @@ main() {
     header "Done!"
 
     if [[ "$DRY_RUN" == "true" ]]; then
+        echo ""
         info "This was a dry run. No changes were made."
-        info "Run without --dry-run to perform the actual release."
+        info "Run without --dry-run to perform the actual release:"
+        echo ""
+        echo "  ./scripts/release.sh --version $VERSION"
+        echo "  # or"
+        echo "  make release-prepare"
+        echo ""
     else
+        echo ""
         success "Release $VERSION completed successfully!"
         echo ""
-        info "Rollback instructions (if needed):"
-        info "  git tag -d $VERSION"
-        info "  git push origin :refs/tags/$VERSION"
-        info "  cp $CHANGELOG_BACKUP $CHANGELOG_FILE"
-        info "  git reset HEAD~1"
+        info "What happens next:"
+        info "  1. GitHub Actions builds binaries (6 platforms)"
+        info "  2. Release created: https://github.com/$REPO_OWNER/$REPO_NAME/releases/tag/$VERSION"
+        info "  3. Monitor progress: https://github.com/$REPO_OWNER/$REPO_NAME/actions"
+        echo ""
+        info "Files modified:"
+        info "  • CHANGELOG.md (version $VERSION added)"
+        info "  • Git commit: chore: prepare release $VERSION"
+        info "  • Git tag: $VERSION"
+        echo ""
+        warning "Rollback instructions (if needed):"
+        echo "  git tag -d $VERSION                    # Delete local tag"
+        echo "  git push origin :refs/tags/$VERSION    # Delete remote tag"
+        echo "  git reset HEAD~1                       # Undo commit"
+        echo "  git checkout CHANGELOG.md              # Restore CHANGELOG"
+        echo ""
     fi
 }
 
