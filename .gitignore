@@ -16,7 +16,91 @@ coverage.out
 
 # OS files
 .DS_Store
+Thumbs.db
 
-# Config
-.env
+# Configuration files (may contain secrets)
 .termplate.yaml
+*.local.yaml
+*.prod.yaml
+*.production.yaml
+
+# Environment files (contains secrets - NEVER COMMIT)
+.env
+.env.*
+!.env.example
+*.secret
+secrets.yaml
+secrets.yml
+
+# Security and credentials (NEVER COMMIT)
+*.key
+*.pem
+*.crt
+*.cer
+*.p12
+*.pfx
+*.jks
+*.keystore
+credentials.json
+credentials.yaml
+service-account*.json
+*.token
+*.credentials
+
+# API keys and secrets
+*secret*
+*password*
+*apikey*
+*api-key*
+*api_key*
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+*.bak
+*.swp
+*.swo
+*~
+
+# Node modules (if using any JS tooling)
+node_modules/
+
+# Python (if using any Python scripts)
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+venv/
+ENV/
+
+# Terraform (if using)
+.terraform/
+*.tfstate
+*.tfstate.*
+.terraform.lock.hcl
+
+# Kubernetes secrets
+*-secret.yaml
+*-secret.yml
+
+# Docker
+.dockerignore
+
+# OS-specific
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+Thumbs.db
+ehthumbs.db
+Desktop.ini
