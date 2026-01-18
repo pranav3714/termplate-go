@@ -375,32 +375,45 @@ update_changelog() {
     # Create new version section
     local version_section="## [${version#v}] - $date"
 
-    # Find [Unreleased] section and insert new version after it
+    # Build new changelog structure
     local new_changelog=""
     local found_unreleased=false
     local in_unreleased=false
+    local skip_unreleased_content=false
+    local line_num=0
 
     while IFS= read -r line; do
-        new_changelog+="$line"$'\n'
+        line_num=$((line_num + 1))
 
         # Found [Unreleased] heading
         if [[ "$line" =~ ^\#\#[[:space:]]*\[Unreleased\] ]]; then
             found_unreleased=true
             in_unreleased=true
+            skip_unreleased_content=true
+            # Write header up to and including [Unreleased]
+            new_changelog+="$line"$'\n'$'\n'
             continue
         fi
 
-        # Reached next ## heading (end of unreleased section)
-        if [[ "$in_unreleased" == "true" && "$line" =~ ^\#\#[[:space:]] ]]; then
-            in_unreleased=false
-            # Insert new empty [Unreleased] content and new version section
-            new_changelog=$'\n'"$version_section"$'\n'"$unreleased_content"$'\n\n'"$line"$'\n'
-            break
+        # Skip the old unreleased content (we'll replace it)
+        if [[ "$skip_unreleased_content" == "true" && "$in_unreleased" == "true" ]]; then
+            # Check if we've reached the next ## heading (end of unreleased section)
+            if [[ "$line" =~ ^\#\#[[:space:]] ]]; then
+                in_unreleased=false
+                skip_unreleased_content=false
+                # Insert new version section and then continue with the old version
+                new_changelog+="$version_section"$'\n'
+                new_changelog+="$unreleased_content"$'\n'$'\n'
+                new_changelog+="$line"$'\n'
+            fi
+            continue
         fi
-    done < <(head -n 20 "$changelog")
 
-    # Append rest of changelog
-    new_changelog+="$(tail -n +21 "$changelog")"
+        # Append everything else
+        if [[ "$skip_unreleased_content" == "false" ]]; then
+            new_changelog+="$line"$'\n'
+        fi
+    done < "$changelog"
 
     if [[ "$found_unreleased" == "false" ]]; then
         error "Could not find [Unreleased] section in CHANGELOG.md"
