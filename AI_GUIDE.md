@@ -35,7 +35,12 @@ Based on the task type, consult:
 | **Configuration** | `docs/CONFIGURATION_GUIDE.md`, `internal/config/config.go` |
 | **Error handling** | `internal/model/errors.go`, `CONVENTIONS.md#error-handling` |
 | **Output formatting** | `internal/output/formatter.go`, `docs/CONFIGURATION_GUIDE.md` |
-| **Testing** | `docs/GO_CLI_COMPREHENSIVE_REFERENCE.md#6-testing-patterns` |
+| **Testing** | `docs/TESTING_PATTERNS.md`, `docs/GO_CLI_COMPREHENSIVE_REFERENCE.md` |
+| **Debugging** | `docs/DEBUG_GUIDE.md`, `docs/FAQ.md` |
+| **Performance profiling** | `docs/PERFORMANCE_GUIDE.md`, `docs/DEBUG_GUIDE.md` |
+| **Docker/Containers** | `docs/DOCKER_DEVELOPMENT.md`, `build/package/Dockerfile` |
+| **Release/Deployment** | `RELEASE_RULEBOOK.md`, `scripts/release.sh` |
+| **Troubleshooting** | `docs/FAQ.md`, `docs/DEBUG_GUIDE.md` |
 | **Architecture question** | `PROJECT_CONTEXT.md`, `CONVENTIONS.md`, `docs/PROJECT_SUMMARY.md` |
 
 ### Phase 3: Examine Examples
@@ -233,7 +238,11 @@ if err != nil {
 | **Add command** | `cmd/myfeature/`, `internal/handler/myhandler.go`, `internal/service/myfeature/` | `cmd/root.go` | `cmd/example/greet.go` |
 | **Add config** | - | `internal/config/config.go`, `internal/config/defaults.go`, `configs/config.example.yaml` | `docs/CONFIGURATION_GUIDE.md` |
 | **Add error** | - | `internal/model/errors.go` | `CONVENTIONS.md#error-handling` |
-| **Add test** | `*_test.go` next to code | - | `docs/GO_CLI_COMPREHENSIVE_REFERENCE.md#6-testing-patterns` |
+| **Add test** | `*_test.go` next to code | - | `docs/TESTING_PATTERNS.md` |
+| **Add mocks** | `*_test.go` with mock structs | - | `docs/TESTING_PATTERNS.md#mocking` |
+| **Debug issue** | - | - | `docs/DEBUG_GUIDE.md`, `docs/FAQ.md` |
+| **Profile code** | - | Add profiling flags | `docs/PERFORMANCE_GUIDE.md` |
+| **Containerize** | `Dockerfile.dev`, `docker-compose.yml` | - | `docs/DOCKER_DEVELOPMENT.md` |
 | **Format output** | - | - | `internal/output/formatter.go` |
 
 ---
@@ -347,6 +356,146 @@ make release-prepare
 **Common Issues**:
 - Working directory not clean → Commit or stash changes
 - Tests failing → Fix tests or use --skip-tests (not recommended)
+
+---
+
+### Scenario 6: "Debug a failing command"
+
+**Analysis Sequence**:
+1. Read `docs/DEBUG_GUIDE.md` - Debugging strategies
+2. Run command with verbose logging: `./mycli -v mycommand`
+3. Check `docs/FAQ.md` - Common issues
+4. Use delve if needed: `dlv debug ./main.go -- mycommand`
+
+**Debug Workflow**:
+```bash
+# Enable debug logging
+./build/bin/mycli --log-level=debug mycommand
+
+# Add strategic logging in code
+slog.Debug("checkpoint", "value", someValue)
+
+# Use delve for breakpoints
+dlv debug ./main.go -- mycommand --flag value
+(dlv) break handler.go:42
+(dlv) continue
+(dlv) print err
+```
+
+**Common Causes**:
+- Configuration not loaded → Check config file location
+- Context not propagated → Ensure `cmd.Context()` passed through
+- Missing initialization → Check `init()` functions
+
+---
+
+### Scenario 7: "Write tests with mocks"
+
+**Analysis Sequence**:
+1. Read `docs/TESTING_PATTERNS.md` - Testing strategies
+2. Check `CONVENTIONS.md#testing` - Test conventions
+3. Look at existing tests for patterns
+
+**Test Pattern**:
+```go
+// Define interface
+type Repository interface {
+    Get(ctx context.Context, id string) (*Model, error)
+}
+
+// Create mock
+type MockRepository struct {
+    GetFunc func(ctx context.Context, id string) (*Model, error)
+}
+
+func (m *MockRepository) Get(ctx context.Context, id string) (*Model, error) {
+    if m.GetFunc != nil {
+        return m.GetFunc(ctx, id)
+    }
+    return nil, errors.New("not implemented")
+}
+
+// Use in test
+func TestService(t *testing.T) {
+    mock := &MockRepository{
+        GetFunc: func(ctx context.Context, id string) (*Model, error) {
+            return &Model{ID: id}, nil
+        },
+    }
+
+    service := NewService(mock)
+    result, err := service.Process(context.Background(), "test")
+    // Assertions...
+}
+```
+
+**Run Tests**:
+```bash
+make test              # All tests
+make coverage          # With coverage
+go test -v ./internal/service/myservice  # Specific package
+```
+
+---
+
+### Scenario 8: "Profile performance issues"
+
+**Analysis Sequence**:
+1. Read `docs/PERFORMANCE_GUIDE.md` - Profiling techniques
+2. Add profiling flags to command
+3. Analyze with pprof
+
+**Profiling Workflow**:
+```bash
+# CPU profiling
+./mycli mycommand --cpuprofile=cpu.prof
+go tool pprof cpu.prof
+(pprof) top
+(pprof) list FunctionName
+
+# Memory profiling
+./mycli mycommand --memprofile=mem.prof
+go tool pprof -alloc_space mem.prof
+
+# Benchmarks
+go test -bench=. -benchmem ./internal/service/myservice
+```
+
+**Common Optimizations**:
+- Pre-allocate slices: `make([]string, 0, len(items))`
+- Use `strings.Builder` instead of concatenation
+- Reuse buffers with `sync.Pool`
+- Profile allocations in hot paths
+
+---
+
+### Scenario 9: "Containerize the application"
+
+**Analysis Sequence**:
+1. Read `docs/DOCKER_DEVELOPMENT.md` - Docker workflows
+2. Check `build/package/Dockerfile` - Multi-stage build
+3. Understand development vs production images
+
+**Docker Workflow**:
+```bash
+# Build production image
+docker build -f build/package/Dockerfile -t mycli:latest .
+
+# Run container
+docker run --rm mycli:latest version
+docker run --rm mycli:latest mycommand
+
+# Development with compose
+docker-compose up -d
+docker-compose exec app make build
+docker-compose exec app make test
+```
+
+**Key Patterns**:
+- Multi-stage builds for small images (~5-10MB)
+- Distroless or scratch base images
+- Non-root user for security
+- BuildKit for build cache optimization
 - Tag already exists → Delete tag or choose new version
 - Network failure → Tag created locally, push manually
 

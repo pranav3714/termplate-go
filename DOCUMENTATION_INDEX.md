@@ -41,6 +41,11 @@
 | **docs/NEXT_STEPS.md** | Guide | What to do after setup | next steps, getting started, post-setup, first steps |
 | **docs/GETTING_STARTED.md** | Tutorial | How to add commands and features | add command, create feature, tutorial, how-to |
 | **docs/CONFIGURATION_GUIDE.md** | Reference | Complete configuration reference | configuration, config, settings, api, database, files, output |
+| **docs/DEBUG_GUIDE.md** | Guide | Debugging strategies and tools | debug, debugging, troubleshoot, breakpoint, delve, logs, trace, inspect |
+| **docs/TESTING_PATTERNS.md** | Guide | Testing strategies and mocking patterns | test, testing, mock, stub, integration, unit, table-driven, coverage, tdd |
+| **docs/DOCKER_DEVELOPMENT.md** | Guide | Container-based development workflows | docker, container, dockerfile, compose, build, deploy, containerize, image |
+| **docs/PERFORMANCE_GUIDE.md** | Guide | Profiling and optimization techniques | performance, profiling, benchmark, optimization, pprof, memory, cpu, trace |
+| **docs/FAQ.md** | Reference | Frequently asked questions | faq, questions, help, troubleshoot, common issues, how to |
 | **docs/CUSTOMIZATION_COMPLETE.md** | Summary | What has been customized | customization, changes, modifications, summary |
 | **docs/PROJECT_SUMMARY.md** | Overview | Full project summary | summary, overview, features, structure |
 | **docs/GO_CLI_COMPREHENSIVE_REFERENCE.md** | Reference | Authoritative Go CLI patterns | cobra, viper, cli, patterns, best practices, testing |
@@ -134,10 +139,46 @@
 
 ### Testing
 
-**Primary**: docs/GO_CLI_COMPREHENSIVE_REFERENCE.md (Testing Patterns)
+**Primary**: docs/TESTING_PATTERNS.md, docs/GO_CLI_COMPREHENSIVE_REFERENCE.md
 **Secondary**: CONVENTIONS.md (Testing), docs/GETTING_STARTED.md
 
-**Topics**: Testing, table-driven tests, mocks, unit tests
+**Topics**: Testing, table-driven tests, mocks, stubs, unit tests, integration tests, coverage, benchmarking
+
+---
+
+### Debugging
+
+**Primary**: docs/DEBUG_GUIDE.md
+**Secondary**: docs/TESTING_PATTERNS.md, CONVENTIONS.md
+
+**Topics**: Debugging, troubleshooting, delve, breakpoints, logs, tracing, inspection, diagnostics
+
+---
+
+### Docker & Containers
+
+**Primary**: docs/DOCKER_DEVELOPMENT.md
+**Secondary**: build/package/Dockerfile, README.md
+
+**Topics**: Docker, containers, dockerfile, compose, containerization, deployment, multi-stage builds, security
+
+---
+
+### Performance & Profiling
+
+**Primary**: docs/PERFORMANCE_GUIDE.md
+**Secondary**: docs/DEBUG_GUIDE.md, docs/TESTING_PATTERNS.md
+
+**Topics**: Performance, profiling, benchmarking, optimization, pprof, memory, CPU, allocations, tracing
+
+---
+
+### FAQ & Troubleshooting
+
+**Primary**: docs/FAQ.md
+**Secondary**: docs/DEBUG_GUIDE.md, docs/GETTING_STARTED.md
+
+**Topics**: FAQ, frequently asked questions, common issues, troubleshooting, quick help, errors
 
 ---
 
@@ -175,12 +216,12 @@
 
 ## 📋 Documentation by File Count
 
-- **Root Level**: 5 files (PROJECT_CONTEXT, AI_GUIDE, CONVENTIONS, QUICK_REFERENCE, README)
-- **docs/**: 8 files (README, 7 guides)
+- **Root Level**: 6 files (PROJECT_CONTEXT, AI_GUIDE, CONVENTIONS, QUICK_REFERENCE, RELEASE_RULEBOOK, README)
+- **docs/**: 13 files (README, 12 guides)
 - **configs/**: 1 file (config.example.yaml)
 - **Code docs**: 7 files (config, model, output, logger, examples)
 
-**Total**: 21 documentation files
+**Total**: 27 documentation files
 
 ---
 
@@ -192,8 +233,14 @@
 | Configure API | docs/CONFIGURATION_GUIDE.md | internal/config/config.go | configs/config.example.yaml |
 | Handle errors | CONVENTIONS.md#error-handling | internal/model/errors.go | - |
 | Format output | internal/output/formatter.go | docs/CONFIGURATION_GUIDE.md | - |
-| Add tests | docs/GO_CLI_COMPREHENSIVE_REFERENCE.md#6 | CONVENTIONS.md#testing | - |
+| Add tests | docs/TESTING_PATTERNS.md | CONVENTIONS.md#testing | - |
+| Write mocks | docs/TESTING_PATTERNS.md#mocking | - | - |
+| Debug issue | docs/DEBUG_GUIDE.md | docs/FAQ.md | - |
+| Profile performance | docs/PERFORMANCE_GUIDE.md | docs/DEBUG_GUIDE.md | - |
+| Run benchmarks | docs/PERFORMANCE_GUIDE.md#benchmarking | docs/TESTING_PATTERNS.md | - |
+| Containerize | docs/DOCKER_DEVELOPMENT.md | build/package/Dockerfile | - |
 | Release version | RELEASE_RULEBOOK.md | scripts/release.sh | make release-prepare |
+| Troubleshoot | docs/FAQ.md | docs/DEBUG_GUIDE.md | - |
 | Understand architecture | PROJECT_CONTEXT.md | CONVENTIONS.md | docs/PROJECT_SUMMARY.md |
 
 ---
@@ -278,6 +325,6 @@ If yes to all, you're ready to work effectively!
 
 ---
 
-**Last Updated**: 2026-01-18
+**Last Updated**: 2026-01-18 (Added: DEBUG_GUIDE, TESTING_PATTERNS, DOCKER_DEVELOPMENT, PERFORMANCE_GUIDE, FAQ)
 **Maintained By**: Project team
 **Status**: Comprehensive documentation for optimal AI and developer experience
