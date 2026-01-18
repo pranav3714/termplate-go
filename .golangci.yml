@@ -30,13 +30,13 @@ linters:
     - tparallel
     - prealloc
 
-  settings:
-    cyclop:
-      max-complexity: 15
-    gocognit:
-      min-complexity: 20
-    nestif:
-      min-complexity: 5
+linters-settings:
+  cyclop:
+    max-complexity: 15
+  gocognit:
+    min-complexity: 20
+  nestif:
+    min-complexity: 5
 
 issues:
   exclude-rules:
