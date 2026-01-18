@@ -88,10 +88,22 @@ audit: tidy vet lint vuln test ## Run all quality checks
 ci: audit coverage build ## Run full CI pipeline
 	@echo "\033[32mCI completed!\033[0m"
 
+.PHONY: release-prepare
+release-prepare: ## Prepare a new release (interactive)
+	@bash scripts/release.sh
+
+.PHONY: release-dry-run
+release-dry-run: ## Preview release changes without committing
+	@bash scripts/release.sh --dry-run
+
+.PHONY: release-patch
+release-patch: ## Auto-increment patch version for release
+	@bash scripts/release.sh --patch
+
 .PHONY: release-dry
-release-dry: ## Dry run release
+release-dry: ## Dry run release (GoReleaser snapshot)
 	goreleaser release --snapshot --clean
 
 .PHONY: release
-release: ## Create release
+release: ## Create release (GoReleaser - requires tag)
 	goreleaser release --clean

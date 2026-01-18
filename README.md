@@ -463,6 +463,47 @@ git push origin v1.0.0
 
 ---
 
+## 📦 Releasing
+
+Quick release automation using GitHub Actions and GoReleaser.
+
+### Quick Commands
+
+```bash
+# Automated (recommended)
+make release-prepare
+
+# Preview first
+make release-dry-run
+
+# Auto-increment patch
+make release-patch
+```
+
+### Release Flow
+
+1. **Update code** and commit changes
+2. **Run** `make release-prepare`
+3. **Script automates**:
+   - CHANGELOG.md updates
+   - Version links
+   - Git tag creation
+4. **GitHub Actions automatically**:
+   - Builds 6 platforms (Linux, macOS, Windows - amd64, arm64)
+   - Creates release
+   - Uploads artifacts
+
+### Complete Guide
+
+📖 **[RELEASE_RULEBOOK.md](RELEASE_RULEBOOK.md)** - Complete release documentation including:
+- Automated and manual processes
+- Troubleshooting guide
+- Rollback procedures
+- Version numbering guidelines
+- AI-assisted releases
+
+---
+
 ## 🐚 Shell Completion
 
 Enable shell completion for a better CLI experience:

@@ -310,6 +310,48 @@ type Service struct {
 
 ---
 
+### Scenario 5: "Create a release"
+
+**Analysis Sequence**:
+1. Read `RELEASE_RULEBOOK.md` - Complete release guide
+2. Run `git status` - Verify clean working directory
+3. Run `make test` - Ensure tests pass
+4. Run `make lint` - Ensure code quality
+5. Check `CHANGELOG.md` - Review unreleased changes
+
+**Execution**:
+```bash
+# Preview changes first
+make release-dry-run
+
+# Execute release (interactive)
+make release-prepare
+
+# Or automated with version
+./scripts/release.sh --version v0.2.0 --yes
+```
+
+**Workflow**:
+- Script prompts for version number (or use --patch/--minor/--major)
+- Automates CHANGELOG.md updates (moves [Unreleased] to versioned section)
+- Updates version comparison links
+- Creates annotated git tag with release notes
+- Pushes to remote (triggers GitHub Actions)
+- GitHub Actions builds binaries and creates release
+
+**Verification**:
+- GitHub Actions: https://github.com/pranav3714/termplate-go/actions
+- Releases: https://github.com/pranav3714/termplate-go/releases
+- Check release appears with all artifacts (6 platform builds)
+
+**Common Issues**:
+- Working directory not clean → Commit or stash changes
+- Tests failing → Fix tests or use --skip-tests (not recommended)
+- Tag already exists → Delete tag or choose new version
+- Network failure → Tag created locally, push manually
+
+---
+
 ## ⚠️ Common Pitfalls for AI Models
 
 ### Pitfall 1: Putting Business Logic in cmd/

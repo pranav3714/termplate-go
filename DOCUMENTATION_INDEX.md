@@ -30,6 +30,7 @@
 | **AI_GUIDE.md** | Guide | AI-specific workflows and analysis patterns | ai, workflow, analysis, patterns, best practices |
 | **CONVENTIONS.md** | Standards | Coding standards, naming, patterns, rules | conventions, standards, patterns, rules, naming |
 | **QUICK_REFERENCE.md** | Reference | Quick lookups, snippets, common patterns | reference, snippets, quick, lookup, cheat sheet |
+| **RELEASE_RULEBOOK.md** | Guide | Complete release and deployment guide | release, deploy, tag, version, publish, changelog, production, shipping, rollout |
 | **README.md** | Overview | Project README, getting started | readme, project, overview, getting started |
 
 ### Detailed Guides (docs/)
@@ -92,6 +93,15 @@
 **Secondary**: configs/config.example.yaml, internal/config/defaults.go
 
 **Topics**: Config, settings, API, database, files, output formats, viper
+
+---
+
+### Releasing & Deployment
+
+**Primary**: RELEASE_RULEBOOK.md, scripts/release.sh
+**Secondary**: CHANGELOG.md, .goreleaser.yml, .github/workflows/release.yml
+
+**Topics**: Release, deploy, tag, version, publish, changelog, production, shipping, rollout
 
 ---
 
@@ -183,6 +193,7 @@
 | Handle errors | CONVENTIONS.md#error-handling | internal/model/errors.go | - |
 | Format output | internal/output/formatter.go | docs/CONFIGURATION_GUIDE.md | - |
 | Add tests | docs/GO_CLI_COMPREHENSIVE_REFERENCE.md#6 | CONVENTIONS.md#testing | - |
+| Release version | RELEASE_RULEBOOK.md | scripts/release.sh | make release-prepare |
 | Understand architecture | PROJECT_CONTEXT.md | CONVENTIONS.md | docs/PROJECT_SUMMARY.md |
 
 ---
